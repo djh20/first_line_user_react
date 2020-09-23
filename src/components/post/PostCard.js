@@ -7,10 +7,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
-  root: {
-    // height:'50%',
-    // width:'100%',
-  },
   title: {
     fontSize: '2rem'
   },
@@ -28,31 +24,13 @@ export default function PostCard(props){
     const classes = useStyles();
     
     return(
-        <Card className={classes.root} style={{marginBottom: marginBottom, width: cardWidth}} align="left">
+        <Card style={{marginBottom: marginBottom, width: cardWidth}} align="left">
         <CardContent>
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             {title}
           </Typography>
           <Typography variant="body2" component="p" noWrap>
            {content}
-          </Typography>
-            <Typography variant="body2" component="p" noWrap>
-           dsdadasdasdsadsadsa
-          </Typography>
-          <Typography variant="body2" component="p" noWrap>
-           dsdadasdasdsadsadsa
-          </Typography>
-          <Typography variant="body2" component="p" noWrap>
-           dsdadasdasdsadsadsa
-          </Typography>
-          <Typography variant="body2" component="p" noWrap>
-           dsdadasdasdsadsadsa
-          </Typography>
-          <Typography variant="body2" component="p" noWrap>
-           dsdadasdasdsadsadsa
-          </Typography>
-          <Typography variant="body2" component="p" noWrap>
-           dsdadasdasdsadsadsazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
           </Typography> 
         </CardContent>
         <CardActions>

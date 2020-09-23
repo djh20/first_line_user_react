@@ -1,6 +1,7 @@
-body, html{
+html,body{
     padding : 0;
     margin : 0;
     background-color: "#2a2a40";
-    overflow-x: hidden;
+    width: "100%";
+    height: "100%";
 }

@@ -7,13 +7,13 @@ const useStyles = makeStyles({
         width:'100%',
       },
       gridContainer:{
-          marginTop : "2vh",
+          marginTop : "2%",
       },
       editor:{
           color : 'black',
           background : 'white',
           width : '50%',
-          height : '30vh'
+          height : '30%'
       }
   });
 export default function PostEditor(){
