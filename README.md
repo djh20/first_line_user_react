@@ -8,6 +8,7 @@ https://nodejs.org/en/download/ 에서 운영체제에 맞는 Node.js를 설치
 1. Project Clone (zip 다운, 명령어 실행 등의 방법)
 
 2. 프로젝트 루트 경로에서(package.json 위치) 'npm install' 실행
+> package.json 내의 dependencies를 자동으로 설치
 
 4. 'npm start' 구동 (기본적으로 3000번 port로 진행)
 
@@ -18,4 +19,6 @@ https://nodejs.org/en/download/ 에서 운영체제에 맞는 Node.js를 설치
 
 
 
-### 의존성 
+## 의존 라이브러리
+
+### Material UI
