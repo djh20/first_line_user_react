@@ -2,7 +2,7 @@
 
 ### Node.js 설치
 
-https://nodejs.org/en/download/에서 운영체제에 맞는 Node.js를 설치
+https://nodejs.org/en/download/ 에서 운영체제에 맞는 Node.js를 설치
 ### yarn 설치
 https://classic.yarnpkg.com/en/docs/install/#windows-stable 에서 Yarn을 설치
 
