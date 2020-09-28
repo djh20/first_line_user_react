@@ -11,6 +11,7 @@ https://nodejs.org/en/download/ 에서 운영체제에 맞는 Node.js를 설치
 > package.json 내의 dependencies를 자동으로 설치
 
 3. PowerShell 관련 설정 (Windows에서만 발생하는 문제, Windows가 아니면 생략)
+
     3-1 환경변수 PATH에 'C:\Windows\System32\WindowsPowerShell\v1.0'를 등록 
         > 경로는 컴퓨터마다 상이할 수도 있음, 해당 경로 존재 확인 후 진행
     3-2 PowerShell을 관리자 권한으로 실행 후 'Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force' 실행
