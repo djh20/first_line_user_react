@@ -11,11 +11,11 @@ cmd 혹은 터미널에서 yarn -v로 설치 확인
 ### 프로젝트 시작하기 
 1. Project Clone (zip 다운, 명령어 실행 등의 방법)
 
-2. package.json의 dependencies에서  "@material-ui/icons" 행 삭제 후 저장(해당 행 3번 과정에서 오류 발생)
+2. 프로젝트 루트 경로에서 package.json 내 dependencies에서  "@material-ui/icons" 행 삭제 후 저장(해당 행 3번 과정에서 오류 발생)
 
 3. 프로젝트 루트 경로에서(package.json 위치) 'yarn install' 실행
 
-4. 'npm install @material-ui/icons' 실행 (2번에서 삭제한 행, npm은 node.js에 포함되어 있음)
+4. 'npm install @material-ui/icons' 실행 (2번에서 삭제한 행, npm은 Node.js에 포함되어 있음)
 
 5. 'yarn start' 구동 (기본적으로 3000번 port로 진행)
 
