@@ -21,8 +21,7 @@ cmd 혹은 터미널에서 yarn -v로 설치 확인
 
 6. http://localhost:3000 에서 확인 
 
-
-* 현 코드 상 REST 요청은 "djh20.iptime.org:5000/~"으로 Proxy 되어 있음.
+> 현 코드 상 REST 요청은 "djh20.iptime.org:5000/~"으로 Proxy 되어 있음.
 
 
 
