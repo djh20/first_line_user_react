@@ -39,5 +39,13 @@ class PostStore {
     });
     return result === null ? null : result.data;
   }
+
+  @action
+  async readPost(post_id) {
+    const result = await axios.get(`/api/post/${postId}`).catch((error) => {
+      return null;
+    });
+    return result === null ? null : result.data;
+  }
 }
 export default PostStore = PostStore.getInstance();

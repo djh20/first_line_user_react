@@ -45,7 +45,7 @@ const AddPost = observer((props) => {
     }
   }
 
-  function toBold()
+  function toBold(e)
   {
     var text = document.getElementById("text");
     text.style.fontStyle = bold;
