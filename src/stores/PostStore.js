@@ -18,14 +18,15 @@ class PostStore {
     await axios
       .post("/api/post/write", { title: title, text: text })
       .then(function (response) {
-        if (response.data["postInfo"] == null) return false;
-        else {
+        if (response.data["postInfo"] != null) 
           {
             /*데이터 저장 로직 */
+            return true;
           }
-          return true;
+          else 
+            return false;
         }
-      })
+      )
       .catch((error) => {
         console.log("error : ", error.response);
       });

@@ -45,6 +45,20 @@ const AddPost = observer((props) => {
     }
   }
 
+  function toBold()
+  {
+    var text = document.getElementById("text");
+    text.style.fontStyle = bold;
+  }
+
+/* 이거 bold랑 Etalic하는거 함수가 작동을 안하네요.. 이유는 모르겠어서 일단 나중에 고칠게요. */
+
+  function toEtalic()
+  {
+    var text = document.getElementById("text");
+    text.style.fontStyle = italic;
+  }
+
   return (
     <div className={classes.root}>
       <Grid Container className={classes.gridContainer}>
@@ -58,18 +72,20 @@ const AddPost = observer((props) => {
               autoFocus
               required
               className={classes.editor}
+              style={{color:"black", textAlign:"center"}}
             />
           </Grid>
         </div>
         <div style={{ padding: 20 }} className={classes.root}>
           <Grid Container item align="center">
-            <ToggleButton style={{ margin: 10 , backgroundColor : 'white'}} >굵게</ToggleButton>
-            <ToggleButton style={{ margin: 10 , backgroundColor : 'white'}}>기울이기</ToggleButton>
+            <Button style={{ margin: 10 , backgroundColor : 'white'}} onclick={toBold}>굵게</Button>
+            <Button style={{ margin: 10 , backgroundColor : 'white'}} onclick={toEtalic}>기울이기</Button>
           </Grid>
         </div>
         <div style={{ padding: 20 }} className={classes.root}>
           <Grid Container item align="center">
             <TextField
+              position="fixed"
               id="text"
               name="text"
               fullWidth
@@ -78,25 +94,22 @@ const AddPost = observer((props) => {
               required
               rows="30"
               className={classes.editor}
+              style ={{marginLeft:120}}
             />
-          </Grid>
-        </div>
-        <div style={{ padding: 20 }} className={classes.root}>
-          <Grid Container item align="center">
-            <Button
-              variant="contained"
-              className={classes.submit}
-              style={{ backgroundColor: "#eabc28" }}
-              type="submit"
-              variant="contained"
-              onClick={addPost}
-            >
-              발행
-            </Button>
+             <Button
+                variant="contained"
+                className={classes.submit}
+                style={{ backgroundColor: "#eabc28", marginLeft:50}}
+                type="submit"
+                variant="contained"
+                onClick={addPost}
+              >
+                발행
+              </Button>
           </Grid>
         </div>
       </Grid>
-    </div>
+    </div>  
   );
 });
 
