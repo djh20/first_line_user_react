@@ -64,16 +64,7 @@ const AddPost = observer((props) => {
       <Grid Container className={classes.gridContainer}>
         <div style={{ padding: 20 }} className={classes.root}>
           <Grid Container item align="center">
-            <TextField
-              id="title"
-              name="title"
-              fullWidth
-              placeholder="제목을 작성해주세요"
-              autoFocus
-              required
-              className={classes.editor}
-              style={{color:"black", textAlign:"center"}}
-            />
+            
           </Grid>
         </div>
         <div style={{ padding: 20 }} className={classes.root}>

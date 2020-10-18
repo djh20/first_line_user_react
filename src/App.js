@@ -3,7 +3,6 @@ import UserHomeLayout from './layout/UserHomeLayout';
 import {makeStyles} from '@material-ui/core';
 import PostUserView from './components/post/PostUserView'
 import PostEditor from './components/post/PostEditor'
-import PostDetailView from './components/post/PostDetailView'
 import "./App.css"
 import {
     BrowserRouter as Router,
@@ -35,7 +34,6 @@ const App = observer( () =>  {
                 <Switch>
                     <Route exact path="/post" component={PostUserView}/>
                     <Route exact path="/post/write" component={PostEditor}/>
-                    <Route exact path="/post/detail" component={PostDetailView}/>
                 </Switch>
                 </Router>
             </UserHomeLayout>
