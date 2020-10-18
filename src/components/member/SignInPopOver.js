@@ -64,14 +64,18 @@ const SignIn = observer( (props) => {
 
   function login(e){
     e.preventDefault()
-    if(memberStore.login(id.current.value,pw.current.value)){
-      alert("로그인 되었습니다")
-      window.location.reload()
-    }
-    else{
-      alert("로그인에 실패했습니다")
-      handleClose();
-    }
+    memberStore.login(id.current.value,pw.current.value).then(result =>{
+          console.log(result)
+          if(result == true){
+            alert("로그인 되었습니다")
+            window.location.reload()
+          }
+          else{
+            alert("로그인에 실패했습니다")
+            handleClose();
+          }
+      }
+    )
   }
 
   return (

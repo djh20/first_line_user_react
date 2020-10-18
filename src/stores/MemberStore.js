@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx';
 import {createContext} from "react";
+import cookie from 'react-cookies'
 import axios from 'axios'
 class MemberStore{
   @observable count = 0;
@@ -17,23 +18,24 @@ class MemberStore{
     this.count++;
   }
   @action logout = () => {
-    localStorage.removeItem('memberInfo')
+    cookie.remove("jwt")
   }
   @action 
   async login(id, pw){
-    await axios.post(
+    return await axios.post(
       '/api/member/login/', 
       {id : id ,pw : pw})
       .then(
         function (response) {
-          if(response.data['memberInfo'] == null)
-            return false
+          console.log(response.status)
+          if(response.status == 410)
+            return false;
           else{
-            localStorage.setItem('memberInfo',  response.data['memberInfo']) 
+            cookie.save("jwt",response.data['jwt'])
+            console.log("true")
             return true
-        }
+          }
     }).catch(error => {console.log('error : ',error.response)});
-    return false
   }
 }
 export default  MemberStore = MemberStore.getInstance()

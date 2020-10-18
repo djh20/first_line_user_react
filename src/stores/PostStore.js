@@ -1,24 +1,23 @@
-import { observable, action } from 'mobx';
+import { observable, action} from 'mobx';
 import {createContext} from "react";
-import axios from 'axios'
+import requestReadAllPost from "../controllers/PostController"
 class PostStore{
-  @observable posts = {};
-  static instance = null;
-
-  static getInstance () {
+  @observable posts = [] // 4-3
+  static instance = null; // 4-1
+  
+  static getInstance () { // 4-1
     if (!PostStore.instance) 
       this.instance = new PostStore();
     return PostStore.instance;
   }
   constructor(){
-    this.context = createContext(this)
+    this.context = createContext(this) // 4-2 
   }
   @action 
-  async readAll(){
-    const result = await axios.get(
-        `/api/post/all`
-    ).catch(error => {return null });
-    return result === null ? null : result.data
+  readAll(){
+    requestReadAllPost().then(result =>{ // 4-4
+      this.posts = [...this.posts, ...result]
+    })
   }
 }
-export default  PostStore = PostStore.getInstance()
+export default  PostStore = PostStore.getInstance() // 4-5

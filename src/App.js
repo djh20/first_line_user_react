@@ -35,7 +35,7 @@ const App = observer( () =>  {
                     <Route exact path="/post" component={PostUserView}/>
                     <Route exact path="/post/write" component={PostEditor}/>
                 </Switch>
-                </Router>
+            </Router>
             </UserHomeLayout>
         </div>
   );

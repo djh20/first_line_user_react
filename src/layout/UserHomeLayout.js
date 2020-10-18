@@ -17,17 +17,7 @@ import Link from '@material-ui/core/Link';
 import AccountButton from '../components/common/AccountButton'
 import SignInPopOver from "../components/member/SignInPopOver"
 import UserInfoPopOver from "../components/member/UserInfoPopOver"
-
-const meta = document.createElement('meta');
-    meta.name = "viewport";
-    meta.content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
-    document.getElementsByTagName('head')[0].appendChild(meta);
-
-var drawerWidth 
-if(window.outerWidth>500)
-    drawerWidth = '15vw'
-else
-    drawerWidth = '80vw'
+import cookie from 'react-cookies'
 
 const useStyle = makeStyles(theme=>({
     '@global': {
@@ -66,6 +56,34 @@ const useStyle = makeStyles(theme=>({
         position:"fixed",
         width:"100%",
         height: '7vh',
+    },
+    appBar:{
+        width : "100%",
+        height : "7%",
+        transition : "all 0.2s",
+        background : "#2a2a40"
+    },
+    drawer:{
+        "@media (min-device-width: 481px)": { // PC
+            width : '20vw'
+          },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            width : '70vw'  
+        }
+    },
+    accountIconArea:{
+        marginRight:'2%'
+    },
+    drawerIconArea:{
+        display: 'flex', 
+        justifyContent: 'flex-end'
+    },
+    contentArea:{
+        width: '100vw',
+        minHeight:'93vh',
+        background:"#2a2a40", 
+        marginTop:'7vh', 
+        position:'sticky'
     }
 }))
 
@@ -75,17 +93,13 @@ function UserHomeLayout(props){
     const { children } = props;
     const [open, setState] = useState(false);
     const classes = useStyle();
-    const authInfo = localStorage.getItem('memberInfo')
+    const authInfo = cookie.load("jwt")
+    console.log(authInfo)
     return(
          <div className={classes.root}>
             <AppBar
                 position="fixed"
-                style={{
-                    width:"100%",
-                    height: '7vh',
-                    transition: 'all 0.2s',
-                    background : '#2a2a40',
-                }}
+                className={classes.appBar}
             >
                 <Toolbar className={classes.toolBar} alignItems="flex-end" position="fixed">
                     <IconButton edge="start" color="inherit" aria-label="Menu" onClick={() => setState(!open)}>
@@ -94,15 +108,15 @@ function UserHomeLayout(props){
                     <div className={classes.title}>
                          첫 줄
                     </div>
-                    <div alignSelf="flex-end" style={{marginRight:'2%'}}>
-                        { authInfo === null ? 
+                    <div alignSelf="flex-end" className={classes.accountIconArea}>
+                        { authInfo == undefined ? 
                         (<AccountButton dialog={SignInPopOver}/>):(<AccountButton dialog={UserInfoPopOver}/>)}
                     </div>
                 </Toolbar>
             </AppBar>
-            <Drawer open={open} style={{ width: drawerWidth }}>
-                <div style={{ width: drawerWidth }}>
-                    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Drawer open={open} className={classes.drawer}>
+                <div className={classes.drawer}>
+                    <div className={classes.drawerIconArea}>
                         <IconButton onClick={() => setState(!open)}>
                             <ChevronLeft />
                         </IconButton>
@@ -130,7 +144,7 @@ function UserHomeLayout(props){
                     </List>
                 </div>
             </Drawer>
-            <div style={{width: '100vw', minHeight:'93vh' ,background:"#2a2a40", marginTop:'7vh', position:'sticky'}}>
+            <div className={classes.contentArea}>
                         {children}
             </div>
     </div>
