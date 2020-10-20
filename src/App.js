@@ -32,7 +32,8 @@ const App = observer( () =>  {
             <UserHomeLayout>
             <Router>
                 <Switch>
-                    <Route exact path="/post" component={PostUserView}/>
+                    <Route path="/posts/:a([A-Za-z]+)" component={PostUserView}/>
+                    <Route path="/post/detail/:a(\d+)">dasdasd</Route>
                     <Route exact path="/post/write" component={PostEditor}/>
                 </Switch>
             </Router>
