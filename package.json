@@ -12,17 +12,25 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
+    "draft-js": "^0.11.7",
     "http-proxy-middleware": "^1.0.5",
     "mobx": "^5.15.7",
     "mobx-react": "^6.3.0",
+<<<<<<< HEAD
     "react": "^16.13.1",
     "react-analytics-charts": "^1.2.11",
     "react-cookies": "^0.1.1",
     "react-dom": "^16.13.1",
     "react-ga": "^3.1.2",
+=======
+    "react": "^16.14.0",
+    "react-cookies": "^0.1.1",
+    "react-dom": "^16.14.0",
+>>>>>>> 5b334007224f5e8493c6572dc8edc28cebc959f4
     "react-jwt-auth": "^0.6.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-summernote": "^2.0.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
