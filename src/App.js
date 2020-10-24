@@ -10,6 +10,7 @@ import {
     Route,
   } from "react-router-dom";
 import {observer} from "mobx-react"
+import PostDetailView from './components/post/PostDetailView'
 
 const useStyle = makeStyles(theme=>({
     root : {
@@ -33,7 +34,7 @@ const App = observer( () =>  {
             <Router>
                 <Switch>
                     <Route path="/posts/:a([A-Za-z]+)" component={PostUserView}/>
-                    <Route path="/post/detail/:a(\d+)">dasdasd</Route>
+                    <Route path="/post/detail/:post_id" component={PostDetailView}/>
                     <Route exact path="/post/write" component={PostEditor}/>
                 </Switch>
             </Router>

@@ -23,7 +23,21 @@ export default async function requestReadAllPost(){ // 5-1
     });
 }
 
-export function readPost(){ // 5-1
-    console.log("haha")
+export async function readPost(post_id){ // 5-1
+    return await axios.get(
+        `/api/post/${post_id}/`, {withCredentials: true}
+    ).catch(error => {return [] }).then(result =>{
+        if(result.data != null){ // 5-2
+            var tmp = result.data
+            var post = new Post(tmp['post_id'], tmp['title'],
+                tmp['text'],tmp['like'],tmp['num_reply'],
+                tmp['tag'],tmp['writer'],
+                tmp['writing_date'],tmp['edting_date'],
+                tmp['temperature'],tmp['keyword'])
+
+            return post
+        }
+        return null
+    });
 }
 

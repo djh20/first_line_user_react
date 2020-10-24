@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TagList from '../common/TagList'
+import Link from '@material-ui/core/Link';
 const useStyles = makeStyles({
   root:{
     "@media (min-device-width: 481px)": { // PC
@@ -83,7 +84,7 @@ const useStyles = makeStyles({
   writing_date:{
     display :'inline',
     marginRight: '0.5%'
-  }
+  },
 });
 
 export default function PostCard(props){
@@ -93,48 +94,52 @@ export default function PostCard(props){
     
     return(
       <div className={classes.root}> 
-          <Card align="left">
-          <CardContent>
-            <div container className={classes.topLine}>
-              <Typography className={classes.title} noWrap gutterBottom>
-                {props.post.title}
+       <Link href={"/post/detail/"+props.post.post_id} underline='None'>
+            <Card align="left">
+            <CardContent>
+              <div container className={classes.topLine}>
+                <Typography className={classes.title} noWrap gutterBottom>
+                  {props.post.title}
+                </Typography>
+                  {
+                    props.post.keyword == "" ? "" : (
+                      <Typography className={classes.keyword} color="textSecondary" gutterBottom>
+                        {props.post.keyword}
+                    </Typography>
+                    )
+                  }
+                <Typography className={classes.temp} color="textSecondary" gutterBottom>
+                  {props.post.temperature} ℃
+                </Typography>
+              </div>
+              <Typography className={classes.text} noWrap>
+              {props.post.text}
+              </Typography> 
+              <Typography className={classes.tag} noWrap>
+              {
+                props.post.tag == "" ? "" : <TagList tags = {props.post.tag.split("/")}/>
+              }
+              </Typography> 
+              <div className={classes.midLine}>
+              <Typography className={classes.like} noWrap>
+                공감 {props.post.like}
               </Typography>
-                {
-                  props.post.keyword == "" ? "" : (
-                    <Typography className={classes.keyword} color="textSecondary" gutterBottom>
-                      {props.post.keyword}
-                  </Typography>
-                  )
-                }
-              <Typography className={classes.temp} color="textSecondary" gutterBottom>
-                {props.post.temperature} ℃
+              <Typography className={classes.reply} noWrap>
+                댓글 {props.post.num_reply}
               </Typography>
-            </div>
-            <Typography className={classes.text} noWrap>
-            {props.post.text}
-            </Typography> 
-            <Typography className={classes.tag} noWrap>
-            <TagList tags = {props.post.tag.split("/")}/>
-            </Typography> 
-            <div className={classes.midLine}>
-            <Typography className={classes.like} noWrap>
-               공감 {props.post.like}
-            </Typography>
-            <Typography className={classes.reply} noWrap>
-               댓글 {props.post.num_reply}
-            </Typography>
-            </div>
-            <div className={classes.bottomLine}>
+              </div>
+              <div className={classes.bottomLine}>
 
-            <Typography className={classes.writing_date} noWrap>
-            {props.post.writing_date}
-            </Typography>
-            <Typography className={classes.writer} noWrap>
-            by {props.post.writer}
-            </Typography>
-            </div>
-          </CardContent>
-        </Card>
+              <Typography className={classes.writing_date} noWrap>
+              {props.post.writing_date}
+              </Typography>
+              <Typography className={classes.writer} noWrap>
+              by {props.post.writer}
+              </Typography>
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
       </div>
     )
 }
