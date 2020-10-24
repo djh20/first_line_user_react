@@ -89,7 +89,6 @@ const useStyles = makeStyles({
 
 export default function PostCard(props){
     const cardWidth = props.cardWidth
-    
     const classes = useStyles();
     
     return(
