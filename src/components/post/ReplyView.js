@@ -14,12 +14,12 @@ const ReplyView = observer( (props) =>{
     const classes = useStyles()
     const replyStore = useContext(ReplyStore.context)
     useEffect(()=>{
-        replyStore.readReples(props.post_id)
+        replyStore.readReplies(props.post_id)
     },[])
     return(
         <div className={classes.root}>
             <div>
-            <ReplyInputField post_id={props.post_id} />
+            <ReplyInputField color='white' post_id={props.post_id} />
             <ReplyList replies={replyStore.replies}></ReplyList>
             </div>
         </div>
@@ -27,4 +27,3 @@ const ReplyView = observer( (props) =>{
 }
 )
 export default ReplyView
-

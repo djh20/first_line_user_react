@@ -6,6 +6,8 @@ import Reply from "../models/Reply";
 
 class ReplyStore {
     @observable replies = []
+    @observable cnt = 1
+    @observable cnt2 = [1]
     static instance = null;
 
     static getInstance() {
@@ -29,7 +31,7 @@ class ReplyStore {
     }
 
     @action
-    readReples(post_id){
+    readReplies(post_id){
         requestReadReplies(post_id).then(result=>{
             this.replies = [...this.replies,...result]
             console.log(this.replies)

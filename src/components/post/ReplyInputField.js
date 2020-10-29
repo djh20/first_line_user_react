@@ -7,9 +7,10 @@ import ReplyStore from "../../stores/ReplyStore";
 
 const useStyles = makeStyles({
     input : {
-        width : '94%',
+        width : '70%',
         color : 'white',
-        marginBottom : '4%'
+        marginBottom : '4%',
+        marginRight : '5%'
     },
     button : {
         marginLeft : '1%',

@@ -5,7 +5,9 @@ import Grid from '@material-ui/core/Grid';
 
 
 const useStyles = makeStyles({
-    
+    root:{
+        width:'90%'
+    }
 })
 
 export default function ReplyList(props){
@@ -21,7 +23,6 @@ export default function ReplyList(props){
                 return(
                 <Grid item className={classes.card} align="center" >
                     <ReplyCard  reply={reply}></ReplyCard>
-                    <hr></hr>
                 </Grid>
                 )
             })

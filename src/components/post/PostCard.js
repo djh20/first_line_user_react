@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TagList from '../common/TagList'
 import Link from '@material-ui/core/Link';
+import parse from 'html-react-parser';
 const useStyles = makeStyles({
   root:{
     "@media (min-device-width: 481px)": { // PC
@@ -112,11 +113,11 @@ export default function PostCard(props){
                 </Typography>
               </div>
               <Typography className={classes.text} noWrap>
-              {props.post.text}
+              {parse(props.post.text)}
               </Typography> 
               <Typography className={classes.tag} noWrap>
               {
-                props.post.tag == "" ? "" : <TagList tags = {props.post.tag.split("/")}/>
+                props.post.tag == "" ? "" : <TagList tags = {props.post.tag}/>
               }
               </Typography> 
               <div className={classes.midLine}>

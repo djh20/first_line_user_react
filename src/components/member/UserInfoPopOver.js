@@ -1,6 +1,5 @@
 import React, {useState, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import MemberStore from '../../stores/MemberStore'
 import Button from '@material-ui/core/Button';
 import {observer} from 'mobx-react'
 
@@ -19,13 +18,16 @@ const useStyles = makeStyles((theme) => ({
 
 const UserInfoPopOver = observer( (props) => {
     const classes = useStyles();
-    const memberStore = useContext(MemberStore.context)
-
+    const handleClose = props.dialogClose
+    const removeCookie = props.removeCookie
+    const setHasCookie = props.setHasCookie
     function logout(e){
       e.preventDefault()
-      memberStore.logout()
+      removeCookie('jwt', { path: '/' })
       alert("로그아웃 되었습니다")
-      window.location.reload()
+      setHasCookie(false)
+      
+      handleClose()
     }
 
     return (

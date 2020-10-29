@@ -15,9 +15,10 @@ const useStyles = makeStyles({
 const UserPostView = observer( (props) => {
       const classes = useStyles();
       const postStore = useContext(PostStore.context)
-      
+      const searchCondition = props.searchCondition
       useEffect(() => {
-          postStore.readAll();
+        if(searchCondition != undefined)
+          postStore.search(searchCondition,undefined,1);
         }, []); 
 
       return(
