@@ -17,7 +17,13 @@ const useStyles = makeStyles({
         padding:'0%',
       },
       wrapper:{
-        width:'50%'
+        "@media (min-device-width: 481px)": {// PC
+          width:'50%'
+        },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+          width:'100%'
+        }
+        
       },
       gridContainer:{
           marginTop : "2%",

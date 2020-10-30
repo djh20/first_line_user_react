@@ -17,13 +17,28 @@ const useStyles = makeStyles({
         width : '100%',
     },
     card: {
-        width : '80%',
-        backgroundColor : '#eae7de',
+        "@media (min-device-width: 481px)": {// PC
+            width : '80%',
+            backgroundColor : '#eae7de',
+        },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            width : '100%',
+            backgroundColor : '#eae7de',
+        }
+        
     },
     title: {
-        fontSize : '2.7rem',
-        fontWeight : 'bold',
-        textAlign : 'center'
+        "@media (min-device-width: 481px)": {// PC
+            fontSize : '2.7rem',
+            fontWeight : 'bold',
+            textAlign : 'center'
+        },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            fontSize : '1.6rem',
+            fontWeight : 'bold',
+            textAlign : 'center' 
+        }
+        
     },
     writer : {
       marginTop : '3%',

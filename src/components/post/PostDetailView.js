@@ -16,12 +16,26 @@ import { useHistory } from 'react-router-dom';
 import ReportIcon from '@material-ui/icons/Report';
 const useStyles = makeStyles({
     root: {
-        width:'80%',
-        marginLeft:'15%'
+        "@media (min-device-width: 481px)": {// PC
+            width:'80%',
+            marginLeft:'15%'
+        },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            width:'100%',
+            padding:"10%"      
+        }
+        
       },
       cards:{
-        width:'80%',
-        overflowY: 'hidden',
+        "@media (min-device-width: 481px)": {// PC
+            width:'80%',
+            overflowY: 'hidden',
+        },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            width:'100%',
+            overflowY: 'hidden',       
+        }
+       
       },
       post:{
         marginBottom : '30%'

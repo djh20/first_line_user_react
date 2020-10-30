@@ -20,6 +20,7 @@ import SearchSpace from '../components/common/SearchSpace';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import FireplaceIcon from '@material-ui/icons/Fireplace';
 import HotelIcon from '@material-ui/icons/Hotel';
+import { search } from '../controllers/PostController';
 
 const useStyle = makeStyles(theme=>({
     root:{
@@ -27,15 +28,31 @@ const useStyle = makeStyles(theme=>({
         height:'100%',
     },
     title : {
-        fontSize :"1.5rem",
-        fontStyle : 'solid',
-        color : '#eabc28',
-        flexGrow: 1,
+        "@media (min-device-width: 481px)": { // PC
+            fontSize :"1.5rem",
+            fontStyle : 'solid',
+            color : '#eabc28',
+            flexGrow: 1,
+          },
+        
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            fontSize :"1rem",
+            fontStyle : 'solid',
+            color : '#eabc28',
+            flexGrow: 1,
+        }
     },
     listItemText :{
-        fontSize : "2rem",
-        fontStyle : 'solid',
-        color : 'black'
+        "@media (min-device-width: 481px)": {// PC
+            fontSize : "2rem",
+            fontStyle : 'solid',
+            color : 'black'
+        },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            fontSize : "1.3rem",
+            fontStyle : 'solid',
+            color : 'black'
+        }
     },
     toolBar:{
         position:"fixed",
@@ -57,7 +74,6 @@ const useStyle = makeStyles(theme=>({
         }
     },
     accountIconArea:{
-        marginRight:'2%'
     },
     drawerIconArea:{
         display: 'flex', 
@@ -97,7 +113,7 @@ function UserHomeLayout(props){
                     <div className={classes.title}>
                          첫 줄
                     </div>
-                    <SearchSpace />
+                    <SearchSpace className={classes.searchSpace} />
                     <div alignSelf="flex-end" className={classes.accountIconArea}>
                             {
                             hasCookie === false ? <AccountButton removeCookie={removeCookie} dialog={SignInPopOver} setHasCookie={setHasCookie} /> :

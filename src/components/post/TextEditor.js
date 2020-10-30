@@ -15,7 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import {stateToHTML} from 'draft-js-export-html';
-
+import Grid from '@material-ui/core/Grid';
 
 
 export const useStyles = makeStyles((theme) => ({
@@ -184,7 +184,8 @@ export default function PageContainer(props){
           onChange={onChange}
         />
       </div>
-      {/* toolbar */}
+      <Grid container justify = "center">
+         {/* toolbar */}
       <div className={classes.toolbar}> 
         <IconButton><FormatUnderlinedIcon className={classes.iconButton} fontSize="small" onClick={onUnderlineClick} /></IconButton>
         <IconButton><FormatBoldIcon className={classes.iconButton} fontSize="small" onClick={onBoldClick}/></IconButton>
@@ -197,6 +198,8 @@ export default function PageContainer(props){
         <InputTag setTagsState={setTags}
                     tagsState={tags}/>
       </div>
+      </Grid>
+     
     </div>
   );
 }
