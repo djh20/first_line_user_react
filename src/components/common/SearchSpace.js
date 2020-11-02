@@ -19,6 +19,10 @@ import {
 const useStyle = makeStyles((theme) => ({
     root:{
         display: 'flex',
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            width:'50%',
+            marginRight: '80%',
+        }
     },
     input:{
         "@media (min-device-width: 481px)": {// PC
@@ -32,6 +36,7 @@ const useStyle = makeStyles((theme) => ({
         
     },
     searchIcon:{
+        padding : '0',
         color:'#ffeb3b'
     },
     select:{

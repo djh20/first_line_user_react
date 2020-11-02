@@ -36,10 +36,11 @@ const useStyle = makeStyles(theme=>({
           },
         
         "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
-            fontSize :"1rem",
+            fontSize :"1.1rem",
             fontStyle : 'solid',
             color : '#eabc28',
             flexGrow: 1,
+            width:"17%"
         }
     },
     listItemText :{
@@ -60,10 +61,19 @@ const useStyle = makeStyles(theme=>({
         height: '7vh',
     },
     appBar:{
-        width : "100%",
-        height : "7%",
-        transition : "all 0.2s",
-        background : "#2a2a40"
+        "@media (min-device-width: 481px)": { // PC
+            width : "100%",
+            height : "7%",
+            transition : "all 0.2s",
+            background : "#2a2a40"
+          },
+        "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
+            width : "100%",
+            height : "8%",
+            transition : "all 0.2s",
+            background : "#2a2a40"
+        }
+        
     },
     drawer:{
         "@media (min-device-width: 481px)": { // PC
