@@ -25,5 +25,5 @@ export default async function requestLogin(id, pw){
             age : member.age ,gender : member.gender,
             phonenumber : member.phonenumber ,email : member.email,
             })
-            .then( res=> {console.log(res.data); return res.data}).catch(error => {console.log(error.response);return error.response.data});
+            .then( res=> {console.log(res); return res}).catch(error => {console.log(error.response);return error.response});
     }
