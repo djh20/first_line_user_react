@@ -2,7 +2,8 @@ import React, {useState, useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import {observer} from 'mobx-react'
-
+import { Redirect } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme) => ({
   paper: {
     display: 'flex',
@@ -42,6 +43,15 @@ const UserInfoPopOver = observer( (props) => {
             >
               로그아웃
             </Button>
+            <Link href="/member/detail" className={classes.editIconBox}>
+              <Button
+                fullWidth
+                color="primary"
+                >
+                마이페이지
+              </Button>
+            </Link>
+            
         </div>
     );
   }

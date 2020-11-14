@@ -17,13 +17,17 @@ export default async function requestLogin(id, pw){
     }).catch(error => {console.log('error : ',error.response)});
   }
 
-  export async function requestRegister(member){
-        return await axios.post(
-            '/api/member/', 
-            {id : member.id ,pw : member.pw,
-            name : member.name ,nickname : member.nickname,
-            age : member.age ,gender : member.gender,
-            phonenumber : member.phonenumber ,email : member.email,
-            })
-            .then( res=> {console.log(res); return res}).catch(error => {console.log(error.response);return error.response});
-    }
+export async function requestRegister(member){
+      return await axios.post(
+          '/api/member/', 
+          {id : member.id ,pw : member.pw,
+          name : member.name ,nickname : member.nickname,
+          age : member.age ,gender : member.gender,
+          phonenumber : member.phonenumber ,email : member.email,
+          })
+          .then( res=> {console.log(res); return res}).catch(error => {console.log(error.response);return error.response});
+  }
+
+export async function requestReadMember(){
+    return await axios.get('/api/member/').then( res=> {console.log(res); return res}).catch(error => {console.log(error.response);return error.response});
+}

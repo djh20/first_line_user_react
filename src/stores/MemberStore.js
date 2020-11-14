@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import {createContext} from "react";
 import axios from 'axios'
 import {useCookies} from 'react-cookie'
-import requestLogin, {requestRegister} from '../controllers/MemberController'
+import requestLogin, {requestRegister, requestReadMember} from '../controllers/MemberController'
 class MemberStore{
   static instance = null;
 
@@ -23,6 +23,11 @@ class MemberStore{
   @action 
   async register(member){
     return requestRegister(member)
+  }
+
+  @action
+  async readMember(){
+    return requestReadMember()
   }
 }
 export default  MemberStore = MemberStore.getInstance()

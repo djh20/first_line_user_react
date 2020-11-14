@@ -7,6 +7,7 @@ import ReplyView from './components/post/ReplyView'
 import {useCookies} from 'react-cookie'
 import SignInView from './components/member/SignInView'
 import SignUpView from './components/member/SignUpView'
+import MemberManageView from './components/member/MemberManageView'
 
 import "./App.css"
 import {
@@ -89,6 +90,7 @@ const App = observer( (props) =>  {
                             <Route exact path="/hot"><PostUserView searchCondition="뜨거움"/></Route>
                             <Route exact path="/cold"><PostUserView searchCondition="차가움"/></Route>
                             <Route exact path="/post/detail/:post_id" component={PostDetailView}/>
+                            <Route exact path="/member/detail" component={MemberManageView}/>
                             <Route exact path="/post/write" component={PostEditor}/>
                             <Route path=""><PostUserView searchCondition="전체"/></Route>
                         </Switch>
