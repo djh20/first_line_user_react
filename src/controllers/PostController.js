@@ -79,3 +79,26 @@ export async function requestAddPost(post_title, post_text, post_tags, post_keyw
         keyword: post_keyword},{withCreadentials: true}
     ).catch(err => console.warn(err)).then(res => {return res.status})
 }
+
+
+export async function requestReadMyPost(){ // 5-1
+    return await axios.get(
+        `/api/post/write/record/`, {withCredentials: true}
+    ).catch(error => {return [] }).then(result =>{
+        var data = [];
+        if(result.data != null){ // 5-2
+            var tmp = result.data
+            Object.keys(tmp).map((key,index) => (
+                data.push((new Post(tmp[key]['post_id'], tmp[key]['title'],
+                tmp[key]['text'],tmp[key]['like'],tmp[key]['num_reply'],tmp[key]['num_lookup'],
+                tmp[key]['tag'],tmp[key]['writer'],
+                tmp[key]['writing_date'],tmp[key]['edting_date'],
+                tmp[key]['temperature'],tmp[key]['keyword']
+                )).get_dic())
+            ))
+            console.log(data)
+            return data
+        }
+        return []
+    });
+}

@@ -4,6 +4,7 @@ import axios from 'axios'
 import {useCookies} from 'react-cookie'
 import requestLogin, {requestRegister, requestReadMember} from '../controllers/MemberController'
 class MemberStore{
+  @observable members = []
   static instance = null;
 
   static getInstance () {
