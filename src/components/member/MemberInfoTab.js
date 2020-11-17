@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MemberStore from '../../stores/MemberStore'
+
 const useStyles = makeStyles({
     root : {
         width : '100%',
@@ -50,6 +51,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
@@ -67,6 +69,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
@@ -84,6 +87,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
@@ -102,6 +106,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
@@ -120,6 +125,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
@@ -138,6 +144,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
@@ -156,6 +163,7 @@ export default function MemberInfoTab(props) {
                 type="text"
                 multiline
                 fullWidth
+                hiddenLabel
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}

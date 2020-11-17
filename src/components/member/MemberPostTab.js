@@ -2,8 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import {observer} from 'mobx-react'
 import PostStore from '../../stores/PostStore'
-import PostWriteFloatButton from './PostWriteFloatButton'
-import PostCardList from './PostCardList'
+import PostCardList from '../post/PostCardList'
 
 
 const useStyles = makeStyles({

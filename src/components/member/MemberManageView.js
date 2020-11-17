@@ -11,6 +11,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import MemberInfoTab from './MemberInfoTab'
+import MemberPostTab from './MemberPostTab'
 import { useHistory } from 'react-router-dom';
 import PostStore from '../../stores/PostStore';
 
@@ -114,7 +115,7 @@ const MemberDetailView = observer((props) => {
                 <MemberInfoTab/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <MemberPostTab/>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 Item Three
