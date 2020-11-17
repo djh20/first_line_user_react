@@ -1,6 +1,6 @@
 import { observable, action} from 'mobx';
 import {createContext} from "react";
-import requestReadAllPost, {readPost, search, requestAddPost} from "../controllers/PostController"
+import requestReadAllPost, {readPost, search, requestAddPost, requestReadMyPost} from "../controllers/PostController"
 class PostStore{
   @observable posts = [] // 4-3
   static instance = null; // 4-1
@@ -16,7 +16,6 @@ class PostStore{
   @action 
   readAll(){
     requestReadAllPost().then(result =>{ // 4-4
-      
       this.posts = [...this.posts, ...result]
       console.log(this.posts)
     })
@@ -44,6 +43,13 @@ class PostStore{
         return true
       else
         return false
+    })
+  }
+
+  @action
+  readMyPost(){
+    return requestReadMyPost().then(result =>{ // 4-4
+      this.posts = [...result]
     })
   }
 }

@@ -1,5 +1,6 @@
+import { FormatColorResetOutlined } from '@material-ui/icons';
 import axios from 'axios'
-import Post from '../models/Post'
+import Member from '../models/Member'
 
 export default async function requestLogin(id, pw){
     return await axios.post(
@@ -29,5 +30,15 @@ export async function requestRegister(member){
   }
 
 export async function requestReadMember(){
-    return await axios.get('/api/member/').then( res=> {console.log(res); return res}).catch(error => {console.log(error.response);return error.response});
+    console.log("컨트롤러 실행")
+    return await axios.get('/api/member/', {withCredentials: true}).catch(error => {return [] }).then(result =>{
+      if(result.data != null){ // 5-2
+          var tmp = result.data
+          var member = new Member(tmp['id'],tmp['pw'], tmp['name'],
+              tmp['nickname'],tmp['age'],tmp['gender'],
+              tmp['phonenumber'],tmp['email'])
+          return member
+      }
+      return null
+  });
 }

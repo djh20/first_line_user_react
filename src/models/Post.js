@@ -12,6 +12,19 @@ export default class Post{
         this.temperature = temperature
         this.keyword = keyword
     }
+
+    get_dic(){
+        return{
+            title : this.title,
+            like : this.like,
+            num_lookup : this.num_lookup,
+            num_reply : this.num_reply,
+            writing_date : this.writing_date,
+            editing_date : this.editing_date,
+            temperature : this.temperature,
+            keyword : this.keyword,
+        }
+    }
 }
 
 // Post = {
