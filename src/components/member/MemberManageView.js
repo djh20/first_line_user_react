@@ -78,15 +78,8 @@ const MemberDetailView = observer((props) => {
     const classes = useStyles();
     const memberStore = useContext(MemberStore.context)
     const [member,setMember] = useState(null);
-    const [id,setId] = useState("");
-    const [name,setName] = useState("");
     const [nickname,setNickname] = useState("");
-    const [age,setAge] = useState("");
-    const [gender,setGender] = useState("");
-    const [phonenumber,setPhonenumber] = useState("");
-    const [email,setEmail] = useState("");
     const [value, setValue] = React.useState(0);
-    const [posts, setPosts] = useState([]);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -94,18 +87,8 @@ const MemberDetailView = observer((props) => {
     useEffect(() => {
         memberStore.readMember().then(member=>{
             setMember(member)
-            setId(member.id)
             setNickname(member.nickname)
-            setName(member.name)
-            setAge(member.age)
-            setGender(member.gender)
-            setPhonenumber(member.phonenumber)
-            setEmail(member.email)
     })
-        PostStore.readMyPost().then(posts=>{
-            setPosts(posts)
-            console.log(posts)
-        })
     },[]);
 
 
@@ -128,17 +111,7 @@ const MemberDetailView = observer((props) => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <MemberInfoTab 
-                    member = {member} 
-                    id={id}
-                    name={name}
-                    nickname={nickname}
-                    age={age}
-                    gender={gender}
-                    phonenumber={phonenumber}
-                    email={email}
-                >
-                </MemberInfoTab>
+                <MemberInfoTab/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two

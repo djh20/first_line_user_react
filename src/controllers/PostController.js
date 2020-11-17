@@ -89,12 +89,12 @@ export async function requestReadMyPost(){ // 5-1
         if(result.data != null){ // 5-2
             var tmp = result.data
             Object.keys(tmp).map((key,index) => (
-                data.push((new Post(tmp[key]['post_id'], tmp[key]['title'],
+                data.push(new Post(tmp[key]['post_id'], tmp[key]['title'],
                 tmp[key]['text'],tmp[key]['like'],tmp[key]['num_reply'],tmp[key]['num_lookup'],
                 tmp[key]['tag'],tmp[key]['writer'],
                 tmp[key]['writing_date'],tmp[key]['edting_date'],
                 tmp[key]['temperature'],tmp[key]['keyword']
-                )).get_dic())
+                ))
             ))
             console.log(data)
             return data

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import MemberStore from '../../stores/MemberStore'
 const useStyles = makeStyles({
     root : {
         width : '100%',
@@ -15,14 +16,36 @@ const useStyles = makeStyles({
 })
 export default function MemberInfoTab(props) {
     const classes = useStyles();
+    const memberStore = useContext(MemberStore.context)
+    const [id,setId] = useState("");
+    const [name,setName] = useState("");
+    const [nickname,setNickname] = useState("");
+    const [age,setAge] = useState("");
+    const [gender,setGender] = useState("");
+    const [phonenumber,setPhonenumber] = useState("");
+    const [email,setEmail] = useState("");
+    
+    useEffect(() => {
+        memberStore.readMember().then(member=>{
+            setId(member.id)
+            setNickname(member.nickname)
+            setName(member.name)
+            setAge(member.age)
+            setGender(member.gender)
+            setPhonenumber(member.phonenumber)
+            setEmail(member.email)
+            console.log(member)
+    })
+    },[]);
+
     return (
         <div className={classes.root}>
-            <Grid>
+            <Grid spacing={4}>
             <TextField
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.id}
+                defaultValue={id}
                 label="아이디"
                 type="text"
                 multiline
@@ -39,7 +62,7 @@ export default function MemberInfoTab(props) {
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.name}
+                defaultValue={name}
                 label="이름"
                 type="text"
                 multiline
@@ -56,7 +79,7 @@ export default function MemberInfoTab(props) {
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.nickname}
+                defaultValue={nickname}
                 label="필명"
                 type="text"
                 multiline
@@ -64,7 +87,7 @@ export default function MemberInfoTab(props) {
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
-                autoFocus
+                
                 InputProps={{
                     className: classes.content,
                     readOnly: true,
@@ -74,7 +97,7 @@ export default function MemberInfoTab(props) {
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.age}
+                defaultValue={age}
                 label="나이"
                 type="text"
                 multiline
@@ -82,7 +105,7 @@ export default function MemberInfoTab(props) {
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
-                autoFocus
+                
                 InputProps={{
                     className: classes.content,
                     readOnly: true,
@@ -92,7 +115,7 @@ export default function MemberInfoTab(props) {
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.gender}
+                defaultValue={gender}
                 label="성별"
                 type="text"
                 multiline
@@ -100,7 +123,7 @@ export default function MemberInfoTab(props) {
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
-                autoFocus
+                
                 InputProps={{
                     className: classes.content,
                     readOnly: true,
@@ -110,7 +133,7 @@ export default function MemberInfoTab(props) {
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.phonenumber}
+                defaultValue={phonenumber}
                 label="전화번호"
                 type="text"
                 multiline
@@ -118,7 +141,7 @@ export default function MemberInfoTab(props) {
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
-                autoFocus
+                
                 InputProps={{
                     className: classes.content,
                     readOnly: true,
@@ -128,7 +151,7 @@ export default function MemberInfoTab(props) {
                 className={classes.textField}
                 margin="dense"
                 id="text"
-                defaultValue={props.email}
+                defaultValue={email}
                 label="이메일"
                 type="text"
                 multiline
@@ -136,7 +159,7 @@ export default function MemberInfoTab(props) {
                 InputLabelProps={{
                     className: classes.floatingLabelFocusStyle,
                 }}
-                autoFocus
+                
                 InputProps={{
                     className: classes.content,
                     readOnly: true,
