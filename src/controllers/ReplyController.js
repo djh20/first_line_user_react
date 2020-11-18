@@ -9,8 +9,8 @@ export default async function requestReadReplies(_post_id){
         if(result.data != null){ 
             var tmp = result.data
             Object.keys(tmp).map((key,index) => (
-                data.push(new Reply(tmp[key]['reply_id'],tmp[key]['text'],tmp[key]['writer']
-                ,tmp[key]['writing_date']))
+                data.push(new Reply(tmp[key]['reply_id'],tmp[key]['post_id'],tmp[key]['text'],tmp[key]['writer']
+                ,tmp[key]['writing_date'],tmp[key]['editing_date'],))
             ))
             console.log(data)
             return data
@@ -28,4 +28,23 @@ export async function requestPostReply(_post_id, _text)
         post_id : _post_id,
         text : _text},{ withCreadentials: true }
         ).catch(err => console.warn(err)).then(res => { return res.status})
+}
+
+export async function requestReadMyReplies(){ // 5-1
+    return await axios.get(
+        `/api/reply/write/record/`, {withCredentials: true}
+    ).catch(error => {return [] }).then(result =>{
+        var data = [];
+        if(result.data != null){ // 5-2
+            var tmp = result.data
+            Object.keys(tmp).map((key,index) => (
+                data.push((new Reply(tmp[key]['reply_id'],tmp[key]['post_id'],tmp[key]['text'],tmp[key]['writer']
+                ,tmp[key]['writing_date'],tmp[key]['editing_date'],
+                )).get_dic())
+            ))
+            console.log(data)
+            return data
+        }
+        return []
+    });
 }

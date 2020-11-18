@@ -1,7 +1,6 @@
 import {observer} from 'mobx-react'
 import React, {useState, useContext,useEffect  } from "react";
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
 import { makeStyles, Typography} from '@material-ui/core'
 import MemberStore from '../../stores/MemberStore'
 import FaceTwoToneIcon from '@material-ui/icons/FaceTwoTone';
@@ -12,8 +11,9 @@ import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
 import MemberInfoTab from './MemberInfoTab'
 import MemberPostTab from './MemberPostTab'
-import { useHistory } from 'react-router-dom';
-import PostStore from '../../stores/PostStore';
+import MemberReplyTab from './MemberReplyTab';
+import MemberInfoDialog from './MemberInfoDialog';
+import MemberLikePostTab from './MemberLikePostTab';
 
 const useStyles = makeStyles({
     root:{
@@ -54,7 +54,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3}>
+                <Box p={4}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -78,8 +78,13 @@ function a11yProps(index) {
 const MemberDetailView = observer((props) => {
     const classes = useStyles();
     const memberStore = useContext(MemberStore.context)
-    const [member,setMember] = useState(null);
+    const [id,setId] = useState("");
+    const [name,setName] = useState("");
     const [nickname,setNickname] = useState("");
+    const [age,setAge] = useState("");
+    const [gender,setGender] = useState("");
+    const [phonenumber,setPhonenumber] = useState("");
+    const [email,setEmail] = useState("");
     const [value, setValue] = React.useState(0);
     const handleChange = (event, newValue) => {
       setValue(newValue);
@@ -87,8 +92,13 @@ const MemberDetailView = observer((props) => {
     
     useEffect(() => {
         memberStore.readMember().then(member=>{
-            setMember(member)
+            setId(member.id)
             setNickname(member.nickname)
+            setName(member.name)
+            setAge(member.age)
+            setGender(member.gender)
+            setPhonenumber(member.phonenumber)
+            setEmail(member.email)
     })
     },[]);
 
@@ -100,8 +110,9 @@ const MemberDetailView = observer((props) => {
                 <FaceTwoToneIcon className={classes.userIcon} color="secondary" />
                 <div>
                     <Typography className={classes.nickname}>{nickname}</Typography>
-                    <Button className={classes.editBtn} variant="contained" color="primary" size="small">
-                        회원정보 수정</Button>
+                    <MemberInfoDialog 
+                        id={id} name={name} nickname={nickname} age={age} gender={gender} phonenumber={phonenumber} email={email} 
+                    ></MemberInfoDialog>
                 </div>
             </Grid>
             <AppBar className={classes.AppBar} position="static">
@@ -109,16 +120,22 @@ const MemberDetailView = observer((props) => {
                     <Tab label="회원정보 보기"/>
                     <Tab label="작성 글 보기"/>
                     <Tab label="작성 댓글 보기" />
+                    <Tab label="관심있는 글 보기"/>
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <MemberInfoTab/>
+                <MemberInfoTab
+                    id={id} name={name} nickname={nickname} age={age} gender={gender} phonenumber={phonenumber} email={email} 
+                />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <MemberPostTab/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                <MemberReplyTab/>
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+                <MemberLikePostTab/>
             </TabPanel>
         </div>
     )

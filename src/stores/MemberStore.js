@@ -1,8 +1,7 @@
 import { observable, action } from 'mobx';
 import {createContext} from "react";
-import axios from 'axios'
-import {useCookies} from 'react-cookie'
-import requestLogin, {requestRegister, requestReadMember} from '../controllers/MemberController'
+import requestLogin, {requestRegister,requestEditMember, requestReadMember} from '../controllers/MemberController'
+import Member from "../models/Member"
 class MemberStore{
   @observable members = []
   static instance = null;
@@ -15,7 +14,18 @@ class MemberStore{
   constructor(){
     this.context = createContext(this)
   }
-
+  @action 
+  createMember(id,pw,name,nickname,age,gender,authority,phonenumber,email){
+      const newMember = new Member(id,pw,name,nickname,age,gender,authority,phonenumber,email)
+      console.log(newMember)
+      return requestEditMember(newMember).then( 
+        result => {
+          if(result==200)
+            return true
+          else
+            return false
+    })
+  }
   @action 
   async login(id, pw){
     return requestLogin(id,pw)

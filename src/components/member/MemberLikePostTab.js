@@ -17,7 +17,7 @@ const MemberPostTab = observer( (props) => {
         const postStore = useContext(PostStore.context)
       
         useEffect(() => {
-            postStore.readMyPost();
+            postStore.readLikePost();
         },[]); 
 
         return(

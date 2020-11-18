@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MemberStore from '../../stores/MemberStore'
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
     root : {
@@ -13,166 +14,167 @@ const useStyles = makeStyles({
     },
     floatingLabelFocusStyle : {
         color: "#eabc28"
+    },
+    typography : {
+        color: '#22c4d6'
+    },
+    container : {
+        marginTop : '1.5%'
     }
 })
 export default function MemberInfoTab(props) {
     const classes = useStyles();
     const memberStore = useContext(MemberStore.context)
-    const [id,setId] = useState("");
-    const [name,setName] = useState("");
-    const [nickname,setNickname] = useState("");
-    const [age,setAge] = useState("");
-    const [gender,setGender] = useState("");
-    const [phonenumber,setPhonenumber] = useState("");
-    const [email,setEmail] = useState("");
-    
-    useEffect(() => {
-        memberStore.readMember().then(member=>{
-            setId(member.id)
-            setNickname(member.nickname)
-            setName(member.name)
-            setAge(member.age)
-            setGender(member.gender)
-            setPhonenumber(member.phonenumber)
-            setEmail(member.email)
-            console.log(member)
-    })
-    },[]);
-
+    const id = props.id
+    console.log(id)
     return (
         <div className={classes.root}>
-            <Grid spacing={4}>
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={id}
-                label="아이디"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={name}
-                label="이름"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={nickname}
-                label="필명"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={age}
-                label="나이"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={gender}
-                label="성별"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={phonenumber}
-                label="전화번호"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            />
-            <TextField
-                className={classes.textField}
-                margin="dense"
-                id="text"
-                defaultValue={email}
-                label="이메일"
-                type="text"
-                multiline
-                fullWidth
-                hiddenLabel
-                InputLabelProps={{
-                    className: classes.floatingLabelFocusStyle,
-                }}
-                
-                InputProps={{
-                    className: classes.content,
-                    readOnly: true,
-                }}
-            /> 
+            <Grid container spacing={5} direction="column">
+            <div className={classes.container}  >
+                <Typography className={classes.typography}>아이디</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.id}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                />
+            </div>
+            <div className={classes.container}>
+                <Typography className={classes.typography}>이름</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.name}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                />
+            </div>
+            <div className={classes.container}>
+                <Typography className={classes.typography}>필명</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.nickname}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                />
+            </div>
+            <div className={classes.container}>
+                <Typography className={classes.typography}>나이</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.age}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                />
+            </div>
+            <div className={classes.container}>
+                <Typography className={classes.typography}>성별</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.gender}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                />
+            </div>
+            <div className={classes.container}>
+                <Typography className={classes.typography}>전화번호</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.phonenumber}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                />
+            </div>
+            <div className={classes.container}>
+                <Typography className={classes.typography}>이메일</Typography>
+                <TextField
+                    className={classes.textField}
+                    margin="dense"
+                    id="text"
+                    defaultValue={props.email}
+                    type="text"
+                    multiline
+                    fullWidth
+                    hiddenLabel
+                    InputLabelProps={{
+                        className: classes.floatingLabelFocusStyle,
+                    }}
+                    
+                    InputProps={{
+                        className: classes.content,
+                        readOnly: true,
+                    }}
+                /> 
+            </div>
             </Grid>
         </div>
     );

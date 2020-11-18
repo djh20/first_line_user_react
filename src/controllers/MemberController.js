@@ -21,8 +21,7 @@ export default async function requestLogin(id, pw){
 export async function requestRegister(member){
       return await axios.post(
           '/api/member/', 
-          {id : member.id ,pw : member.pw,
-          name : member.name ,nickname : member.nickname,
+          {id : member.id ,name : member.name ,nickname : member.nickname,
           age : member.age ,gender : member.gender,
           phonenumber : member.phonenumber ,email : member.email,
           })
@@ -30,7 +29,6 @@ export async function requestRegister(member){
   }
 
 export async function requestReadMember(){
-    console.log("컨트롤러 실행")
     return await axios.get('/api/member/', {withCredentials: true}).catch(error => {return [] }).then(result =>{
       if(result.data != null){ // 5-2
           var tmp = result.data
@@ -41,4 +39,8 @@ export async function requestReadMember(){
       }
       return null
   });
+}
+
+export async function requestEditMember(_member){
+  return await axios.put('/api/member/',{member : _member}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
 }
