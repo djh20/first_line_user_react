@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import {createContext} from "react";
-import requestLogin, {requestRegister,requestEditMember, requestReadMember} from '../controllers/MemberController'
+import requestLogin, {requestRegister,requestEditMember, requestReadMember, requestChangePw} from '../controllers/MemberController'
 import Member from "../models/Member"
 class MemberStore{
   @observable members = []
@@ -39,6 +39,18 @@ class MemberStore{
   @action
   async readMember(){
     return requestReadMember()
+  }
+
+  @action
+  async changePw(currentPw,NewPw) {
+    console.log("store 실행")
+    return requestChangePw(currentPw,NewPw).then( 
+      result => {
+        if(result==200)
+          return true
+        else
+          return false
+  })
   }
 }
 export default  MemberStore = MemberStore.getInstance()

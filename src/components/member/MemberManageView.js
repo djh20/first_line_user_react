@@ -14,7 +14,6 @@ import MemberPostTab from './MemberPostTab'
 import MemberReplyTab from './MemberReplyTab';
 import MemberInfoDialog from './MemberInfoDialog';
 import MemberLikePostTab from './MemberLikePostTab';
-
 const useStyles = makeStyles({
     root:{
         width: '80%',

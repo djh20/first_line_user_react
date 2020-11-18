@@ -44,3 +44,8 @@ export async function requestReadMember(){
 export async function requestEditMember(_member){
   return await axios.put('/api/member/',{member : _member}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
 }
+
+export async function requestChangePw(currentPw,NewPw){
+  console.log("컨트롤러 실행")
+  return await axios.put('/api/member/change/password/',{before : currentPw ,after:NewPw}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
+}

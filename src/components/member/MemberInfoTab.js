@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MemberStore from '../../stores/MemberStore'
 import Typography from '@material-ui/core/Typography';
-
+import MemberPwDialog from './MemberPwDialog';
 const useStyles = makeStyles({
     root : {
         width : '100%',
