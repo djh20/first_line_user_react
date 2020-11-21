@@ -1,5 +1,5 @@
 import React, {useState, useContext} from "react";
-import { Editor, EditorState, RichUtils, AtomicBlockUtils, ContentState } from "draft-js";
+import { Editor, EditorState, RichUtils, AtomicBlockUtils, ContentState, convertFromHTML } from "draft-js";
 import {convertToRaw} from 'draft-js';
 import { IconButton, makeStyles } from '@material-ui/core'
 import UndoIcon from '@material-ui/icons/Undo';
@@ -94,13 +94,20 @@ export default function PageContainer(props){
   const setChecked = props.setChecked
   const keyword = props.keyword
   const setKeyword = props.setKeyword
+  const text = props.text
   const contentState = ContentState
-  const [editorState, setState] = useState(EditorState.createEmpty())
+  const [editorState, setState] = useState(EditorState.createWithContent(
+    ContentState.createFromBlockArray(
+      convertFromHTML(text)
+    )
+  ))
 	const [selection, setSelection] = useState(editorState.getSelection())
 	const [blockType, setBlockType] = useState(editorState
 		.getCurrentContent()
 		.getBlockForKey(selection.getStartKey())
     .getType());
+
+
 
   const toggleBlockType = blockType => {
     onChange(RichUtils.toggleBlockType(editorState, blockType));

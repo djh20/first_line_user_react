@@ -13,7 +13,7 @@ import {
     makeStyles
 } from '@material-ui/core';
 import { Menu, ChevronLeft, Home, Inbox, Mail } from '@material-ui/icons';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import AccountButton from '../components/common/AccountButton'
 import UserInfoPopOver from "../components/member/UserInfoPopOver"
 import SearchSpace from '../components/common/SearchSpace';
@@ -141,25 +141,33 @@ function UserHomeLayout(props){
                     </div>
                     <Divider />
                     <List>
-                        <Link  href='/'>
+                        <Link   to={{
+                            pathname: "/",
+                        }}>
                         <ListItem button>
                             <ListItemIcon><Home /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>홈</ListItemText>
                         </ListItem>
                         </Link>
-                        <Link  href='/warm'>
+                        <Link   to={{
+                            pathname: "/warm",
+                        }}>
                         <ListItem button>
                             <ListItemIcon><HotelIcon /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>따뜻한</ListItemText>
                         </ListItem>
                         </Link>
-                        <Link  href='/hot'>
+                        <Link   to={{
+                            pathname: "/hot",
+                        }}>
                         <ListItem button>
                             <ListItemIcon><FireplaceIcon /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>뜨거운</ListItemText>
                         </ListItem>
                         </Link>
-                        <Link  href='/cold'>
+                        <Link   to={{
+                            pathname: "/cold",
+                        }}>
                         <ListItem button>
                             <ListItemIcon><AcUnitIcon /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>차가운</ListItemText>

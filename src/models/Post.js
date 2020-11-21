@@ -1,9 +1,9 @@
 export default class Post{
-    constructor(post_id,title,text,like,num_reply,tag,writer,writing_date,editing_date,temperature,keyword){
+    constructor(post_id,title,text,num_good,num_reply,tag,writer,writing_date,editing_date,temperature,keyword,isMyPost="", isLike){
         this.post_id = post_id
         this.title = title
         this.text = text
-        this.like = like
+        this.num_good = num_good
         this.num_reply = num_reply
         this.tag = tag
         this.writer = writer
@@ -11,6 +11,8 @@ export default class Post{
         this.editing_date = editing_date
         this.temperature = temperature
         this.keyword = keyword
+        this.isMyPost = isMyPost
+        this.isLike = isLike
     }
 }
 
