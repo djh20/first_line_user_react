@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
@@ -9,19 +9,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function AccountButton(props){
+function LogoutButton(props){
   const classes = useStyles();
   const history = useHistory()
+  const removeCookie = props.removeCookie
+  const setHasCookie = props.setHasCookie
   function linkToMyPage(){
-    history.push("/member/detail")
+    removeCookie('jwt', { path: '/' })
+    setHasCookie(false)
+    history.push("/login")
   }
 return (
     <div style={{display:'inline'}} >
       <IconButton color="inherit" onClick={linkToMyPage}>
-        <AccountCircleIcon fontSize="large" />
+        <ExitToAppIcon fontSize="large" />
       </IconButton>
     </div>
   );
 }
 
-  export default AccountButton;
+  export default LogoutButton;

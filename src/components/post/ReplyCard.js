@@ -8,6 +8,8 @@ import Input from "@material-ui/core/Input";
 import ReplyStore from '../../stores/ReplyStore'
 import DeleteIcon from '@material-ui/icons/Delete';
 import { green, indigo } from '@material-ui/core/colors';
+import { useHistory } from 'react-router-dom';
+import SnackbarStore from '../../stores/SnackbarStore'
 const useStyles = makeStyles((theme) =>({
     root : {
         width : '80%',
@@ -71,23 +73,26 @@ export default function ReplyCard(props){
     const isMine = props.reply.isMine
     const modifyText = React.useRef()
     const replyStore = React.useContext(ReplyStore.context)
+    const histroy = useHistory()
+
     function modifyReply(){
         replyStore.modifyReply(props.reply.reply_id, modifyText.current.value).then(result=>{
             if(result == 200){
-                alert("성공적으로 수정 되었습니다")
-                window.location.reload()
+                setModifyMode(!modifyMode)
+                histroy.push("/post/detail/"+props.reply.post_id, { update: true })
+                SnackbarStore.pushMessage("성공적으로 수정되었습니다", true)
             }else{
-                alert("댓글 수정에 실패했습니다")
+                SnackbarStore.pushMessage("댓글 수정에 실패했습니다", false)
             }
         })
     }
     function deleteReply(){
         replyStore.deleteReply(props.reply.reply_id).then(result=>{
             if(result == 200){
-                alert("성공적으로 삭제 되었습니다")
-                window.location.reload()
+                SnackbarStore.pushMessage("성공적으로 삭제되었습니다", true)
+                histroy.push("/post/detail/"+props.reply.post_id, { update: true })
             }else{
-                alert("댓글 삭제에 실패했습니다")
+                SnackbarStore.pushMessage("댓글 삭제에 실패했습니다", false)
             }
         })
     }

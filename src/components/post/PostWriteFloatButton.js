@@ -1,7 +1,7 @@
 import React from 'react'
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
@@ -32,7 +32,12 @@ export default function PostWriteFloatButtin(props){
     const classes = useStyles()
     return(
         <Grid container edge="end" justify="flex-end" alignItems="flex-end" className={classes.root}>
-        <Link href="/post/write" className={classes.editIconBox}>
+        <Link       
+         to={
+        {pathname: "/post/write/"}
+        } 
+        style={{ textDecoration: 'none' }}
+        className={classes.editIconBox}>
             <Fab className={classes.editIconButton}>
             <EditIcon/>
             </Fab>

@@ -10,6 +10,7 @@ import { CenterFocusStrong } from '@material-ui/icons';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import postStore from '../../stores/PostStore';
 import Container from '@material-ui/core/Container';
+import SnackbarStore from '../../stores/SnackbarStore'
 
 const useStyles = makeStyles({
     root: {
@@ -54,11 +55,11 @@ export default function PostEditor(props){
     const addPost = () => {
         postStore.addPost(title.current.value, text, tags, keyword).then(result =>{
           if(result){
-            alert("작품이 게시되었습니다");
+            SnackbarStore.pushMessage("성공적으로 게시되었습니다", true)
             window.location.replace("/")
           }
           else{
-            alert("작품 게시에 실패하였습니다");
+            SnackbarStore.pushMessage("작품 게시에 실패하였습니다", false)
             handleClose();
           }
         })
@@ -67,11 +68,11 @@ export default function PostEditor(props){
     const updatePost = () => {
       postStore.updatePost(old_post_id, title.current.value, text, tags, keyword).then(result =>{
         if(result){
-          alert("작품이 수정되었습니다");
+          SnackbarStore.pushMessage("성공적으로 수정되었습니다", true)
           window.location.replace("/")
         }
         else{
-          alert("작품 수정에 실패했습니다.");
+          SnackbarStore.pushMessage("작품 수정에 실패했습니다", false)
           handleClose();
         }
       })

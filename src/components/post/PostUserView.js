@@ -19,7 +19,7 @@ const UserPostView = observer( (props) => {
       useEffect(() => {
         if(searchCondition != undefined)
           postStore.search(searchCondition,undefined,1);
-        }, []); 
+        }, [searchCondition]); 
 
       return(
           <div className={classes.root}>

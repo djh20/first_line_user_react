@@ -30,7 +30,7 @@ class PostStore{
     console.log(query)
     console.log(pageNo)
 
-    const codeTable = {'전체':0,'차가움':1,'따뜻함':2,'뜨거움':3,'제목':4,'내용':5,'필명':6,'키워드':7,'태그':8}
+    const codeTable = {'전체':0,'차가움':1,'따뜻함':2,'뜨거움':3,'제목':4,'내용':30,'필명':14,'키워드':21,'태그':13}
     return search(codeTable[code], query, pageNo).then(result=>{
       this.posts = [...result]
     })

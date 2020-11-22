@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core'
 import {observer} from 'mobx-react'
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 
 var elem = (document.compatMode === "CSS1Compat") ? 
     document.documentElement :
@@ -57,7 +57,11 @@ const columns =
         field: 'detail',
         headerName : '상세',
         renderCell:(params) => (
-            <Link href={"/post/detail/"+params.value['post_id']} underline='None'>
+            <Link   to={{
+                pathname: "/post/detail/"+params.value['post_id'],
+            }}
+            style={{ textDecoration: 'none' }}
+            >
                 <Button >이동</Button>
             </Link>
         )

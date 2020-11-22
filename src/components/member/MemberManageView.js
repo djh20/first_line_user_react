@@ -14,6 +14,7 @@ import MemberPostTab from './MemberPostTab'
 import MemberReplyTab from './MemberReplyTab';
 import MemberInfoDialog from './MemberInfoDialog';
 import MemberLikePostTab from './MemberLikePostTab';
+import MyTemperatureGraph from './MyTemperatureGraph'
 const useStyles = makeStyles({
     root:{
         width: '80%',
@@ -120,6 +121,7 @@ const MemberDetailView = observer((props) => {
                     <Tab label="작성 글 보기"/>
                     <Tab label="작성 댓글 보기" />
                     <Tab label="관심있는 글 보기"/>
+                    <Tab label="내 온도 그래프"/>
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -135,6 +137,9 @@ const MemberDetailView = observer((props) => {
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <MemberLikePostTab/>
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+                <MyTemperatureGraph/>
             </TabPanel>
         </div>
     )

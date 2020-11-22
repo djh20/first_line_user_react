@@ -4,13 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import TagList from '../common/TagList'
 import { Typography } from '@material-ui/core';
-import ReactDOM from 'react-dom';
 import CardContent from '@material-ui/core/CardContent';
 import parse from 'html-react-parser';
-import Grid from '@material-ui/core/Grid';
-import {ConvertFromRaw} from 'draft-js';
-import {stateToHTML} from 'draft-js-export-html';
-
 
 const useStyles = makeStyles({
     root: {
@@ -62,6 +57,7 @@ const useStyles = makeStyles({
 export default function PostDetailCard(props){
     const classes = useStyles();
     const text = parse(props.post.text)
+    
     return(
         <div className={classes.root}>
                 <Card className={classes.card}>

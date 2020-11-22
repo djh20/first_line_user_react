@@ -43,6 +43,8 @@ export async function readPost(post_id){ // 5-1
 
 
 export async function search(code, query, pageNo){ // 5-1
+    console.log(code)
+    console.log(query)
     return await axios.get(
         `/api/post/`, {params : {code : code, page_no : pageNo, query:query }}, {withCredentials: true}
     ).catch(error => {return [] }).then(result =>{
@@ -67,11 +69,6 @@ export async function search(code, query, pageNo){ // 5-1
 
 export async function requestAddPost(post_title, post_text, post_tags, post_keyword)
 {
-    console.log(post_title)
-    console.log(post_text)
-    console.log(post_tags)
-    console.log(post_keyword)
-
     return await axios.post('/api/post/',{
         title: post_title,
         text: post_text,

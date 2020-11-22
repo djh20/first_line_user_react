@@ -102,9 +102,9 @@ export default function PostCard(props){
     const classes = useStyles();
     const temp = props.post.temperature
     var tempColor
-    if(temp < 30)
+    if(temp < 40)
       tempColor = "#3f51b5"
-    else if(30 <= temp && temp <= 60)
+    else if(40 <= temp && temp <= 60)
       tempColor = "#f44336"
     else
       tempColor = "#ba000d"
@@ -145,6 +145,7 @@ export default function PostCard(props){
        to={
         {pathname: "/post/detail/"+props.post.post_id}
         }
+        style={{ textDecoration: 'none' }}
       >
             <Card align="left">
             <CardContent>

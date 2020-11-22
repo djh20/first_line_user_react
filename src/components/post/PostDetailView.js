@@ -21,6 +21,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { green, indigo } from '@material-ui/core/colors';
 import PostReportDialog from '../report/PostReportDialog'
 import ReplyReportDialog from '../report/ReplyReportDialog'
+import SnackbarStore from '../../stores/SnackbarStore'
+
 const useStyles = makeStyles({
     root: {
         "@media (min-device-width: 481px)": {// PC
@@ -91,23 +93,23 @@ const PostDetailView = observer( (props) => {
     const replyStore = useContext(ReplyStore.context)
     const post_id = props.match.params.post_id
     const [isMyPost,setIsMyPost] = useState(false)
+    const [reRender,setReRender] = useState(false)
     const history = useHistory();
     
     useEffect(() => {
         postStore.readPost(post_id).then(post=>{
-            console.log(post)
             setPost(post)
         })
-    },[]);
+    },[reRender]);
 
     const deleteMyPost = (e) => {
         e.preventDefault();
         postStore.deleteMyPost(post_id).then(result => {
             if(result == true){
-                alert("게시글이 성공적으로 삭제되었습니다")
-                window.location.replace("/")
+                SnackbarStore.pushMessage("게시글이 성공적으로 삭제되었습니다", true)
+                history.push('/')
             }else{
-                alert("게시글 삭제에 실패했습니다")
+                SnackbarStore.pushMessage("게시글이 삭제에 실패했습니다", false)
             }
         })
     }
@@ -115,9 +117,10 @@ const PostDetailView = observer( (props) => {
     function likePost(){
         postStore.likePost(post_id).then(result => {
             if(result == true){
-                window.location.reload()
+                setReRender(!reRender)
+                history.push('/post/detail/'+post_id)
             }else{
-                alert("게시글 좋아요에 실패했습니다")
+                SnackbarStore.pushMessage("게시글이 좋아요에 실패했습니다", false)
             }
         })
     }
@@ -142,7 +145,9 @@ const PostDetailView = observer( (props) => {
                                                 old_keyword: post.keyword,
                                                 old_tag: post.tag,
                                              }
-                                        }}>
+                                        }}
+                                        style={{ textDecoration: 'none' }}
+                                        >
                                             <IconButton>
                                         <EditIcon style={{ color: green[500] }} fontSize="big"/>
                                         </IconButton>
