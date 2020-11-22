@@ -20,7 +20,7 @@ export default function ChangePwDialog(props) {
         setOpen(true);
     }
     const handleClose = () => {
-        memberStore.changePw(id.current.value).then(result =>{
+        memberStore.changeRandomPw(id.current.value).then(result =>{
             if(result['status'] == 200)
             {
                 setCode(1)

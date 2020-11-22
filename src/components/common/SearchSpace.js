@@ -68,16 +68,17 @@ const SearchSpace = observer( (props) => {
     };
 
     const searchButtonClick = () => {
-        postStore.search(category.current.value, input.current.value,1)
+        postStore.search(category.current.value, input.current.value)
     }
     return (
         <div class="input-holder">
             <Select className={classes.select}
-                defaultValue={'내용'}
+                defaultValue={'전체'}
                 onClose={handleClose}
                 onOpen={handleOpen}
                 inputRef={category}
             >
+                <MenuItem value={'전체'}>전체</MenuItem>
                 <MenuItem value={'내용'}>내용</MenuItem>
                 <MenuItem value={'키워드'}>키워드</MenuItem>
                 <MenuItem value={'필명'}>필명</MenuItem>

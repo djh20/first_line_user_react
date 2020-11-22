@@ -29,6 +29,7 @@ export default function MemberPwDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [barOpen, setBarOpen]= React.useState(false);
     const [code, setCode] = React.useState(0);
+    const [message, setMessage] = React.useState("");
     const [values, setValues] = React.useState({
         currentPassword: '',
         newPassword: '',
@@ -43,24 +44,22 @@ export default function MemberPwDialog(props) {
             setCode(2)
             setOpen(false)
             setBarOpen(true)
+            setMessage("새 비밀번호와 비밀번호 확인이 다릅니다.")
         }
         else {
-        memberStore.changePw(values.currentPassword,values.newPassword).then(result => {
-            console.log(result)
-            if(result == true)
-            {
-                setCode(1)
-            }      
-            else
-                setCode(2)
-            setOpen(false)
-            setBarOpen(true)
-        })
-        setOpen(false)
-        memberStore.readMember()
+            memberStore.changePw(values.currentPassword,values.newPassword).then(result => {
+                if(result['status'] == 200)
+                {
+                    setCode(1)
+                }
+                else
+                    setCode(2)
+                setOpen(false)
+                setBarOpen(true)
+                setMessage(result['data']['message'])
+            })
         }
-    };
-
+    }
     const handleChange = (prop) => (event) => {
         setValues({ ...values, [prop]: event.target.value });
       };
@@ -160,10 +159,10 @@ export default function MemberPwDialog(props) {
             {
             code == 1 ?(
             <Alert onClose={() => {setBarOpen(false)}} severity="success">
-                수정 성공하였습니다.
+                {message}
             </Alert>):(
                 <Alert onClose={() => {setBarOpen(false)}} severity="error">
-                수정 실패하였습니다.
+                {message}
             </Alert>
             )
             }

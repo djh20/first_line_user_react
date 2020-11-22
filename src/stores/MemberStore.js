@@ -19,13 +19,9 @@ class MemberStore{
       const newMember = new Member(id,pw,name,nickname,age,gender,authority,phonenumber,email)
       console.log(newMember)
       return requestEditMember(newMember).then( 
-        result => {
-          if(result==200)
-            return true
-          else
-            return false
-    })
-  }
+        (result) => {return result}
+      )
+    }
   @action 
   async login(id, pw){
     return requestLogin(id,pw)
@@ -43,17 +39,12 @@ class MemberStore{
 
   @action
   async changePw(currentPw,NewPw) {
-    console.log("store 실행")
     return requestChangePw(currentPw,NewPw).then( 
-      result => {
-        if(result==200)
-          return true
-        else
-          return false
-  })
-  }
+      (result) => {return result}
+      )
+    }
   @action 
-  changePw(id)
+  changeRandomPw(id)
   {
     return requestChangeRandomPw(id).then(
       (result) => {return result}

@@ -34,11 +34,11 @@ export async function requestReadMember(){
 }
 
 export async function requestEditMember(_member){
-  return await axios.put('/api/member/',{member : _member}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
+  return await axios.put('/api/member/',{member : _member}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res})
 }
 
 export async function requestChangePw(currentPw,NewPw){
-  return await axios.put('/api/member/change/password/',{before : currentPw ,after:NewPw}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
+  return await axios.put('/api/member/change/password/',{before : currentPw ,after:NewPw}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res})
 }
 
 export async function requestChangeRandomPw(_id) {
