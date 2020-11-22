@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import MemberStore from '../../stores/MemberStore'
 import {observer} from "mobx-react"
 import Modal from '@material-ui/core/Modal';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import ChangePwDialog from './ChangePwDialog'
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '92vh',
@@ -51,25 +53,28 @@ const SignInView = observer( (props) => {
     const classes = useStyles();
     const id = useRef("")
     const pw = useRef("")
+    const [open,setOpen] = useState(false);
+    const [code, setCode] = React.useState(0);
+    const [message, setMessage] = React.useState("");
     const setHasCookie = props.setHasCookie
     const memberStore = useContext(MemberStore.context)
     function login(e){
       e.preventDefault()
       if(id.current.value != "" && pw.current.value != ""){
             memberStore.login(id.current.value,pw.current.value).then(result =>{
-              if(result == true){
-                alert("로그인 되었습니다")
-                setHasCookie(true)
+              if(result['status'] == 200)
+              {
+                  setCode(0);
+                  setHasCookie(true)
               }
-              else{
-                alert("로그인에 실패했습니다")
-              }
+              else
+                  setCode(1);
+              setOpen(true);
+              setMessage(result['data']['message'])
           }
         )
-      }else{
-        alert("아이디와 비밀번호를 입력해주세요")
+        }
       }
-    }
 
 
 
@@ -125,9 +130,7 @@ const SignInView = observer( (props) => {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    {"비밀번호를 잃어버리셨나요?"}
-                  </Link>
+                  <ChangePwDialog/>
                 </Grid>
                 <Grid item>
                   <Link href="/signup" variant="body2">
@@ -138,8 +141,20 @@ const SignInView = observer( (props) => {
             </form>
           </div>
         </Grid>
-
+        <Snackbar open={open} autoHideDuration={6000} onClose={() => {setOpen(false)}}>
+            {
+                code == 1 ?(
+                <Alert onClose={() => {setOpen(false)}} severity="error">
+                    {message}
+                </Alert>):(
+                <Alert onClose={() => {setOpen(false)}} severity="success">
+                    {message}
+                </Alert>
+                )
+            }
+      </Snackbar>
       </Grid>
+      
     );
   }
 )

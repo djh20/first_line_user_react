@@ -16,6 +16,7 @@ export default function MemberInfoDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [barOpen, setBarOpen]= React.useState(false);
     const [code, setCode] = React.useState(0);
+    const [genderOpen, setGenderOpen] = React.useState(false);
     const defult_id = props.id
     const defult_name = props.name
     const defult_nickname = props.nickname
