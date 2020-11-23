@@ -36,20 +36,14 @@ class PostStore{
   @action
   addPost(post_title, post_text, post_tags, post_keyword){
     return requestAddPost(post_title, post_text, post_tags, post_keyword).then(result=>{
-      if(result==200)
-        return true
-      else
-        return false
+      return result
     })
   }
 
   @action
   updatePost(post_id, post_title, post_text, post_tags, post_keyword){
     return requestUpdatePost(post_id,post_title, post_text, post_tags, post_keyword).then(result=>{
-      if(result==200)
-        return true
-      else
-        return false
+      return result
     })
   }
 
@@ -57,6 +51,7 @@ class PostStore{
   readMyPost(){
     return requestReadMyPost().then(result =>{ // 4-4
       this.posts = [...result]
+      return result
     })
   }
 
@@ -64,6 +59,7 @@ class PostStore{
   readLikePost(){
     return requestReadLikePost().then(result =>{ // 4-4
       this.posts = [...result]
+      return result
     })
   }
 

@@ -86,7 +86,7 @@ export async function requestUpdatePost(post_id,post_title, post_text, post_tags
         text: post_text,
         tag: post_tags,
         keyword: post_keyword},{withCreadentials: true}
-    ).catch(err => console.warn(err)).then(res => {return res.status})
+    ).catch(err => {console.warn(err); return err.response;}).then(res => {return res})
 }
 
 export async function requestReadMyPost(){ // 5-1

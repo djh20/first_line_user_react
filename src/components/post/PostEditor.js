@@ -38,6 +38,7 @@ const useStyles = makeStyles({
       }
     }
   );
+
 export default function PostEditor(props){
 
     const old_post_id = props.location.state == undefined ? undefined : props.location.state.old_post_id
@@ -61,7 +62,6 @@ export default function PostEditor(props){
           }
           else{
             SnackbarStore.pushMessage("작품 게시에 실패하였습니다", false)
-            handleClose();
           }
         })
     }
@@ -74,7 +74,6 @@ export default function PostEditor(props){
         }
         else{
           SnackbarStore.pushMessage("작품 수정에 실패했습니다", false)
-          handleClose();
         }
       })
   }
