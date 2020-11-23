@@ -7,16 +7,8 @@ export default async function requestLogin(id, pw){
     return await axios.post(
       '/api/member/login/', 
       {id : id ,pw : pw})
-      .then(
-        function (response) {
-          console.log(response.status)
-          if(response.status == 410)
-            return false;
-          else{
-
-            return true
-          }
-    }).catch(error => {console.log('error : ',error.response)});
+      .then(res => {return res} 
+    ).catch(error => {console.log('error : ',error.response); return error.response});
   }
 
 export async function requestRegister(member){
@@ -43,13 +35,17 @@ export async function requestReadMember(){
 }
 
 export async function requestEditMember(_member){
-  return await axios.put('/api/member/',{member : _member}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
+  return await axios.put('/api/member/',{member : _member}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res})
 }
 
 export async function requestChangePw(currentPw,NewPw){
-  console.log("컨트롤러 실행")
-  return await axios.put('/api/member/change/password/',{before : currentPw ,after:NewPw}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res.status})
+  return await axios.put('/api/member/change/password/',{before : currentPw ,after:NewPw}, {withCredentials: true}).catch(err => {console.warn(err); return err.response}).then(res => {return res})
 }
+
+export async function requestChangeRandomPw(_id) {
+  return await axios.post('/api/member/password/',{id : _id}).then(res => {return res}).catch(err => {console.log(err); return err.response});
+}
+
 
 
 export async function reqeustMyTemperature(code){
@@ -65,3 +61,4 @@ export async function reqeustMyTemperature(code){
     return []
 });
 }
+

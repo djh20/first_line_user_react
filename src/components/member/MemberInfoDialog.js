@@ -16,6 +16,8 @@ export default function MemberInfoDialog(props) {
     const [open, setOpen] = React.useState(false);
     const [barOpen, setBarOpen]= React.useState(false);
     const [code, setCode] = React.useState(0);
+    const [genderOpen, setGenderOpen] = React.useState(false);
+    const [message, setMessage] = React.useState("");
     const defult_id = props.id
     const defult_name = props.name
     const defult_nickname = props.nickname
@@ -37,19 +39,17 @@ export default function MemberInfoDialog(props) {
     const handleClose = () => {
         memberStore.createMember(id.current.value, "", name.current.value,nickname.current.value,age.current.value,
             gender.current.value,phonenumber.current.value,email.current.value).then(result => {
-            console.log(result)
-            if(result == true)
+            if(result['status'] == 200)
             {
                 setCode(1)
-                window.location.reload()
+                window.location.reload();
             }      
             else
                 setCode(2)
             setOpen(false)
             setBarOpen(true)
+            setMessage(result['data']['message'])
         })
-        setOpen(false)
-        memberStore.readMember()
     };
 
     const selectClose = () => {
@@ -113,7 +113,7 @@ export default function MemberInfoDialog(props) {
                 />
                 
                 {
-                defult_gender == 1 ?(
+                defult_gender == '남성' ?(
                 <Select   
                     defaultValue={true}
                     onClose={selectClose}
@@ -169,10 +169,10 @@ export default function MemberInfoDialog(props) {
             {
             code == 1 ?(
             <Alert onClose={() => {setBarOpen(false)}} severity="success">
-                수정 성공하였습니다.
+                {message}
             </Alert>):(
                 <Alert onClose={() => {setBarOpen(false)}} severity="error">
-                수정 실패하였습니다.
+                {message}
             </Alert>
             )
             }

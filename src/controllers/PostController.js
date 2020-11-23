@@ -42,11 +42,10 @@ export async function readPost(post_id){ // 5-1
 }
 
 
+
 export async function search(code, query, pageNo){ // 5-1
-    console.log(code)
-    console.log(query)
     return await axios.get(
-        `/api/post/`, {params : {code : code, page_no : pageNo, query:query }}, {withCredentials: true}
+        `/api/post/`, {params : {code : code, query:query }}, {withCredentials: true}
     ).catch(error => {return [] }).then(result =>{
         var data = [];
         if(result.data != null){ // 5-2

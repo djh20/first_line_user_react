@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useRef, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,8 +11,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import MemberStore from '../../stores/MemberStore'
 import {observer} from "mobx-react"
+import Modal from '@material-ui/core/Modal';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import ChangePwDialog from './ChangePwDialog'
 import SnackbarStore from '../../stores/SnackbarStore'
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '92vh',
@@ -48,6 +51,9 @@ const SignInView = observer( (props) => {
     const classes = useStyles();
     const id = useRef("")
     const pw = useRef("")
+    const [open,setOpen] = useState(false);
+    const [code, setCode] = React.useState(0);
+    const [message, setMessage] = React.useState("");
     const setHasCookie = props.setHasCookie
     const memberStore = useContext(MemberStore.context)
     function login(e){
@@ -65,7 +71,6 @@ const SignInView = observer( (props) => {
       }else{
         SnackbarStore.pushMessage("아이디와 비밀번호를 입력해주세요", false)
       }
-    }
 
 
 
@@ -121,6 +126,7 @@ const SignInView = observer( (props) => {
               </Button>
               <Grid container>
                 <Grid item xs>
+                  <ChangePwDialog/>
                   <Link   
                   to={{
                       pathname: "#",
@@ -129,6 +135,7 @@ const SignInView = observer( (props) => {
                   >
                     {"비밀번호를 잃어버리셨나요?"}
                   </Link>
+
                 </Grid>
                 <Grid item>
                 <Link   
@@ -144,8 +151,20 @@ const SignInView = observer( (props) => {
             </form>
           </div>
         </Grid>
-
+        <Snackbar open={open} autoHideDuration={6000} onClose={() => {setOpen(false)}}>
+            {
+                code == 1 ?(
+                <Alert onClose={() => {setOpen(false)}} severity="error">
+                    {message}
+                </Alert>):(
+                <Alert onClose={() => {setOpen(false)}} severity="success">
+                    {message}
+                </Alert>
+                )
+            }
+      </Snackbar>
       </Grid>
+      
     );
   }
 )

@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import {createContext} from "react";
-import requestLogin, {requestRegister,requestEditMember, requestReadMember, requestChangePw, reqeustMyTemperature} from '../controllers/MemberController'
+import requestLogin, {requestRegister,requestEditMember, requestReadMember, requestChangePw,requestChangeRandomPw, reqeustMyTemperature} from '../controllers/MemberController'
 import Member from "../models/Member"
 class MemberStore{
   @observable members = []
@@ -19,13 +19,9 @@ class MemberStore{
       const newMember = new Member(id,pw,name,nickname,age,gender,authority,phonenumber,email)
       console.log(newMember)
       return requestEditMember(newMember).then( 
-        result => {
-          if(result==200)
-            return true
-          else
-            return false
-    })
-  }
+        (result) => {return result}
+      )
+    }
   @action 
   async login(id, pw){
     return requestLogin(id,pw)
@@ -43,14 +39,16 @@ class MemberStore{
 
   @action
   async changePw(currentPw,NewPw) {
-    console.log("store 실행")
     return requestChangePw(currentPw,NewPw).then( 
-      result => {
-        if(result==200)
-          return true
-        else
-          return false
-  })
+      (result) => {return result}
+      )
+    }
+  @action 
+  changeRandomPw(id)
+  {
+    return requestChangeRandomPw(id).then(
+      (result) => {return result}
+    )
   }
   @action getMyTemperature(code){
     return reqeustMyTemperature(code).then(result =>{

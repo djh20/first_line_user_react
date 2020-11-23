@@ -25,10 +25,7 @@ class PostStore{
     return readPost(post_id)
   }
   @action
-  search(code, query, pageNo) {
-    console.log(code)
-    console.log(query)
-    console.log(pageNo)
+  search(code, query) {
 
     const codeTable = {'전체':0,'차가움':1,'따뜻함':2,'뜨거움':3,'제목':4,'내용':30,'필명':14,'키워드':21,'태그':13}
     return search(codeTable[code], query, pageNo).then(result=>{
