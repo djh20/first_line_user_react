@@ -7,8 +7,7 @@ export default async function requestLogin(id, pw){
     return await axios.post(
       '/api/member/login/', 
       {id : id ,pw : pw})
-      .then(res => {return res} 
-    ).catch(error => {console.log('error : ',error.response); return error.response});
+      .catch(error => {return error.response}).then(res => {return res} );
   }
 
 export async function requestRegister(member){

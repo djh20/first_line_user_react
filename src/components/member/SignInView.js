@@ -60,7 +60,7 @@ const SignInView = observer( (props) => {
       e.preventDefault()
       if(id.current.value != "" && pw.current.value != ""){
             memberStore.login(id.current.value,pw.current.value).then(result =>{
-              if(result == true){
+              if(result.status == 200){
                 setHasCookie(true)
                 SnackbarStore.pushMessage("로그인에 성공했습니다", true)
               }
@@ -71,9 +71,7 @@ const SignInView = observer( (props) => {
       }else{
         SnackbarStore.pushMessage("아이디와 비밀번호를 입력해주세요", false)
       }
-
-
-
+    }
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
@@ -166,6 +164,6 @@ const SignInView = observer( (props) => {
       </Grid>
       
     );
-  }
-)
+
+  })
 export default SignInView
