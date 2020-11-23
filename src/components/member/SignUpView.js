@@ -11,6 +11,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import MemberStore from '../../stores/MemberStore'
 import Member from '../../models/Member'
 import SnackbarStore from '../../stores/SnackbarStore'
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
@@ -40,13 +44,20 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  select : {
+    width : "100%"
+  },
+  label : {
+      marginTop : "1.5%",
+      fontSize : '0.8rem'
+}
 }));
 
 export default function SignUpView(props) {
   const classes = useStyles();
   const setHasCookie = props.setHasCookie
   const memberStore = useContext(MemberStore.context)
-
+  const [genderOpen, setGenderOpen] = React.useState(false);
   const id = useRef("")
   const pw = useRef("")
   const name = useRef("")
@@ -55,7 +66,14 @@ export default function SignUpView(props) {
   const gender = useRef("")
   const phonenumber = useRef("")
   const email = useRef("")
+  const selectClose = () => {
+    setGenderOpen(false);
+    console.log(gender.current.value)
+  };
 
+  const selectOpen = () => {
+      setGenderOpen(true);
+  };
   function register(e){
     e.preventDefault()
     if(id.current.value == "") {SnackbarStore.pushMessage("아이디를 입력해주세요", false);return;}
@@ -158,18 +176,17 @@ export default function SignUpView(props) {
               autoComplete="current-password"
               inputRef={age}
             /> 
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="gender"
-              label="성별"
-              type="text"
-              id="gender"
-              autoComplete="current-password"
-              inputRef={gender}
-            />
+            <InputLabel className={classes.label}>
+                성별
+            </InputLabel>
+            <Select   
+              className={classes.select}
+              onClose={selectClose}
+              onOpen={selectOpen}
+            >
+              <MenuItem value={false}>여성</MenuItem>
+              <MenuItem value={true}>남성</MenuItem>
+            </Select>
             <TextField
               variant="outlined"
               margin="normal"

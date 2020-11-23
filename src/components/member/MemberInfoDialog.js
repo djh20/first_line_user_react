@@ -11,8 +11,25 @@ import Alert from '@material-ui/lab/Alert';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import MemberPwDialog from './MemberPwDialog';
+import { makeStyles } from '@material-ui/core'
+import InputLabel from '@material-ui/core/InputLabel';
+
+
+const useStyles = makeStyles( (theme) => ({
+    
+    select : {
+        width : "100%"
+    },
+    label : {
+        marginTop : "1.5%",
+        fontSize : '0.8rem'
+    }
+}))
+
+
 
 export default function MemberInfoDialog(props) {
+    const classes = useStyles()
     const [open, setOpen] = React.useState(false);
     const [barOpen, setBarOpen]= React.useState(false);
     const [code, setCode] = React.useState(0);
@@ -111,10 +128,13 @@ export default function MemberInfoDialog(props) {
                     multiline
                     fullWidth
                 />
-                
+                <InputLabel className={classes.label}>
+                성별
+                </InputLabel>
                 {
                 defult_gender == '남성' ?(
                 <Select   
+                    className={classes.select}
                     defaultValue={true}
                     onClose={selectClose}
                     onOpen={selectOpen}
@@ -123,7 +143,8 @@ export default function MemberInfoDialog(props) {
                     <MenuItem value={false}>여성</MenuItem>
                     <MenuItem value={true}>남성</MenuItem>
                 </Select>):(
-                <Select       
+                <Select   
+                    className={classes.select}    
                     defaultValue={false}
                     onClose={selectClose}
                     onOpen={selectOpen}

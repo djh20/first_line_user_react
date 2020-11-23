@@ -13,7 +13,7 @@ export default async function requestLogin(id, pw){
 export async function requestRegister(member){
       return await axios.post(
           '/api/member/', 
-          {id : member.id ,name : member.name ,nickname : member.nickname,
+          {id : member.id ,pw : member.pw ,name : member.name ,nickname : member.nickname,
           age : member.age ,gender : member.gender,
           phonenumber : member.phonenumber ,email : member.email,
           })
