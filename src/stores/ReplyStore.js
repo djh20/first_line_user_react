@@ -1,6 +1,6 @@
 import { observable, action } from "mobx";
 import { createContext } from "react";
-import requestReadReplies,{requestPostReply, requestReadMyReplies} from "../controllers/ReplyController";
+import requestReadReplies,{requestPostReply, requestReadMyReplies, requestModifyReply, requestDeleteReply} from "../controllers/ReplyController";
 import Reply from "../models/Reply";
 
 
@@ -33,15 +33,24 @@ class ReplyStore {
     @action
     readReplies(post_id){
         requestReadReplies(post_id).then(result=>{
-            this.replies = [...this.replies,...result]
+            this.replies = [...result]
             console.log(this.replies)
         })
     }
 
     @action
+    modifyReply(reply_id, reply_text){
+        return requestModifyReply(reply_id, reply_text)
+    }
+
+    @action
+    deleteReply(reply_id){
+        return requestDeleteReply(reply_id)
+    }
+
+    @action
     readMyReplies(){
         return requestReadMyReplies().then(result =>{ // 4-4
-            console.log(this.replies)
             this.replies = [...result]
         })
     }

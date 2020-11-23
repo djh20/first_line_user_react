@@ -3,11 +3,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +15,7 @@ import Modal from '@material-ui/core/Modal';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import ChangePwDialog from './ChangePwDialog'
+import SnackbarStore from '../../stores/SnackbarStore'
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '92vh',
@@ -62,18 +60,16 @@ const SignInView = observer( (props) => {
       e.preventDefault()
       if(id.current.value != "" && pw.current.value != ""){
             memberStore.login(id.current.value,pw.current.value).then(result =>{
-              if(result['status'] == 200)
-              {
-                  setCode(0);
-                  setHasCookie(true)
+              if(result == true){
+                setHasCookie(true)
+                SnackbarStore.pushMessage("로그인에 성공했습니다", true)
               }
               else
-                  setCode(1);
-              setOpen(true);
-              setMessage(result['data']['message'])
+                SnackbarStore.pushMessage("로그인에 실패했습니다", false)
           }
         )
-        }
+      }else{
+        SnackbarStore.pushMessage("아이디와 비밀번호를 입력해주세요", false)
       }
 
 
@@ -131,9 +127,23 @@ const SignInView = observer( (props) => {
               <Grid container>
                 <Grid item xs>
                   <ChangePwDialog/>
+                  <Link   
+                  to={{
+                      pathname: "#",
+                  }}
+                  style={{ textDecoration: 'none' }}
+                  >
+                    {"비밀번호를 잃어버리셨나요?"}
+                  </Link>
+
                 </Grid>
                 <Grid item>
-                  <Link href="/signup" variant="body2">
+                <Link   
+                        to={{
+                            pathname: "/signup",
+                        }}
+                        style={{ textDecoration: 'none' }}
+                        >
                     {"계정이 없으신가요?"}
                   </Link>
                 </Grid>

@@ -13,14 +13,15 @@ import {
     makeStyles
 } from '@material-ui/core';
 import { Menu, ChevronLeft, Home, Inbox, Mail } from '@material-ui/icons';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
+import LogoutButton from '../components/common/LogoutButton'
 import AccountButton from '../components/common/AccountButton'
-import UserInfoPopOver from "../components/member/UserInfoPopOver"
 import SearchSpace from '../components/common/SearchSpace';
 import AcUnitIcon from '@material-ui/icons/AcUnit';
 import FireplaceIcon from '@material-ui/icons/Fireplace';
 import HotelIcon from '@material-ui/icons/Hotel';
 import { search } from '../controllers/PostController';
+import NoticeButton from '../components/common/NoticeButton'
 
 const useStyle = makeStyles(theme=>({
     root:{
@@ -28,19 +29,20 @@ const useStyle = makeStyles(theme=>({
         height:'100%',
     },
     title : {
+        flexGrow: 1,
+        width:"17%"
+    },
+    titleText : {
         "@media (min-device-width: 481px)": { // PC
             fontSize :"1.5rem",
             fontStyle : 'solid',
             color : '#eabc28',
-            flexGrow: 1,
           },
         
         "@media (min-device-width: 320px) and (max-device-width: 480px)": { // Mobile
             fontSize :"1.1rem",
             fontStyle : 'solid',
             color : '#eabc28',
-            flexGrow: 1,
-            width:"17%"
         }
     },
     listItemText :{
@@ -84,6 +86,8 @@ const useStyle = makeStyles(theme=>({
         }
     },
     accountIconArea:{
+        marginRight:'1%',
+        marginLeft:'2%'
     },
     drawerIconArea:{
         display: 'flex', 
@@ -120,15 +124,24 @@ function UserHomeLayout(props){
                     <IconButton edge="start" color="inherit" aria-label="Menu" onClick={() => setState(!open)}>
                         <Menu />
                     </IconButton>
+
+
                     <div className={classes.title}>
+                    <Link   to={{
+                    pathname: "/",
+                    }}
+                    style={{ textDecoration: 'none' }}
+                    className={classes.titleText}
+                    >
                          첫 줄
+                    </Link>
+
                     </div>
                     <SearchSpace className={classes.searchSpace} />
                     <div alignSelf="flex-end" className={classes.accountIconArea}>
-                            {
-                            hasCookie === false ? <AccountButton removeCookie={removeCookie} dialog={SignInPopOver} setHasCookie={setHasCookie} /> :
-                                                    <AccountButton removeCookie={removeCookie} dialog={UserInfoPopOver} setHasCookie={setHasCookie} />
-                            }               
+                        <NoticeButton />
+                         <AccountButton />           
+                         <LogoutButton removeCookie={removeCookie}  setHasCookie={setHasCookie}/>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -141,25 +154,46 @@ function UserHomeLayout(props){
                     </div>
                     <Divider />
                     <List>
-                        <Link  href='/'>
+                        <Link   to={{
+                            pathname: "/",
+                        }}
+                        onClick={() => setState(!open)}
+                        style={{ textDecoration: 'none' }}
+                        >
                         <ListItem button>
                             <ListItemIcon><Home /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>홈</ListItemText>
                         </ListItem>
                         </Link>
-                        <Link  href='/warm'>
+                        <Link   
+                        to={{
+                            pathname: "/warm",
+                        }}
+                        style={{ textDecoration: 'none' }}
+                        onClick={() => setState(!open)}
+                        >
                         <ListItem button>
                             <ListItemIcon><HotelIcon /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>따뜻한</ListItemText>
                         </ListItem>
                         </Link>
-                        <Link  href='/hot'>
+                        <Link   to={{
+                            pathname: "/hot",
+                        }}
+                        onClick={() => setState(!open)}
+                        style={{ textDecoration: 'none' }}
+                        >
                         <ListItem button>
                             <ListItemIcon><FireplaceIcon /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>뜨거운</ListItemText>
                         </ListItem>
                         </Link>
-                        <Link  href='/cold'>
+                        <Link   to={{
+                            pathname: "/cold",
+                        }}
+                        onClick={() => setState(!open)}
+                        style={{ textDecoration: 'none' }}
+                        >
                         <ListItem button>
                             <ListItemIcon><AcUnitIcon /></ListItemIcon>                            
                                 <ListItemText className={classes.listItemText}>차가운</ListItemText>

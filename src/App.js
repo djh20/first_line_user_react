@@ -8,7 +8,7 @@ import {useCookies} from 'react-cookie'
 import SignInView from './components/member/SignInView'
 import SignUpView from './components/member/SignUpView'
 import MemberManageView from './components/member/MemberManageView'
-
+import MyTemperatureGraph from './components/member/MyTemperatureGraph'
 import "./App.css"
 import {
     BrowserRouter as Router,
@@ -17,6 +17,7 @@ import {
   } from "react-router-dom";
 import {observer} from "mobx-react"
 import PostDetailView from './components/post/PostDetailView'
+import CommonSnackbar from './components/common/CommonSnackbar'
 
 const useStyle = makeStyles(theme=>({
     '@global': {
@@ -30,7 +31,7 @@ const useStyle = makeStyles(theme=>({
           maxHeight: '100vh'
         },
         '*::-webkit-scrollbar': {
-          width: '0.1rem',
+          width: '0.5rem',
           backgroundColor: '#2a2a40',
         },
         '*::-webkit-scrollbar-track': {
@@ -92,12 +93,15 @@ const App = observer( (props) =>  {
                             <Route exact path="/post/detail/:post_id" component={PostDetailView}/>
                             <Route exact path="/member/detail" component={MemberManageView}/>
                             <Route exact path="/post/write" component={PostEditor}/>
+                            <Route exact path="/graph" component={MyTemperatureGraph}/>
                             <Route path=""><PostUserView searchCondition="전체"/></Route>
                         </Switch>
                     </UserHomeLayout>
                     </Router>
                 )
+
             }
+            <CommonSnackbar/>
         </div>
   );
 })

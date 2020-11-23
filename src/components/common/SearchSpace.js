@@ -68,7 +68,7 @@ const SearchSpace = observer( (props) => {
     };
 
     const searchButtonClick = () => {
-        postStore.search(category.current.value, input.current.value)
+        postStore.search(category.current.value, input.current.value,1)
     }
     return (
         <div class="input-holder">
@@ -91,7 +91,7 @@ const SearchSpace = observer( (props) => {
             </ThemeProvider>
             <IconButton className={classes.searchIcon}> 
             {/* <Router> */}
-                <Link to="/search">
+                <Link to="/search" style={{ textDecoration: 'none' }}>
                     <SearchIcon className={classes.searchIcon} onClick={searchButtonClick} fontsize="small"></SearchIcon>
                 </Link>
             {/* </Router> */}

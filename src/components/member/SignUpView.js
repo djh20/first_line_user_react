@@ -3,18 +3,14 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import MemberStore from '../../stores/MemberStore'
 import Member from '../../models/Member'
-
+import SnackbarStore from '../../stores/SnackbarStore'
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
@@ -62,23 +58,27 @@ export default function SignUpView(props) {
 
   function register(e){
     e.preventDefault()
-    if(id.current.value == "") {alert("아이디를 입력해주세요");return;}
-    if(pw.current.value == "") {alert("비밀번호를 입력해주세요");return;}
-    if(name.current.value == "") {alert("이름을 입력해주세요");return;}
-    if(nickname.current.value == "") {alert("필명 입력해주세요");return;}
-    if(age.current.value == "") {alert("나이를 입력해주세요");return;}
-    if(gender.current.value == "") {alert("성별을 선택해주세요");return;}
-    if(phonenumber.current.value == "") {alert("전화번호를 입력해주세요");return;}
-    if(email.current.value == "") {alert("이메일을 입력해주세요");return;}
+    if(id.current.value == "") {SnackbarStore.pushMessage("아이디를 입력해주세요", false);return;}
+    if(pw.current.value == "") {SnackbarStore.pushMessage("비밀번호를 입력해주세요", false);return;}
+    if(name.current.value == "") {SnackbarStore.pushMessage("이름을 입력해주세요", false);return;}
+    if(nickname.current.value == "") {SnackbarStore.pushMessage("필명을 입력해주세요", false);return;}
+    if(age.current.value == "") {SnackbarStore.pushMessage("나이를 입력해주세요", false);return;}
+    if(gender.current.value == "") {SnackbarStore.pushMessage("성별을 선택해주세요", false);return;}
+    if(phonenumber.current.value == "") {SnackbarStore.pushMessage("전화번호를 입력해주세요", false);return;}
+    if(email.current.value == "") {SnackbarStore.pushMessage("이메일을 입력해주세요", false);return;}
+
     var member = new Member(id.current.value,pw.current.value,name.current.value,
       nickname.current.value,age.current.value,gender.current.value,
       phonenumber.current.value,email.current.value)
     console.log(member)
     memberStore.register(member).then(res => {
-      console.log(res)
-      alert(res.data['message'])
-        if(res.status == 200)
+      
+        if(res.status == 200){
+          SnackbarStore.pushMessage(res.data['message'], true)
           setHasCookie(true)
+        }else{
+          SnackbarStore.pushMessage(res.data['message'], false)
+        }
     })
 
     

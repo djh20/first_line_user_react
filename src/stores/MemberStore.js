@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import {createContext} from "react";
-import requestLogin, {requestRegister,requestEditMember, requestReadMember, requestChangePw,requestChangeRandomPw} from '../controllers/MemberController'
+import requestLogin, {requestRegister,requestEditMember, requestReadMember, requestChangePw,requestChangeRandomPw, reqeustMyTemperature} from '../controllers/MemberController'
 import Member from "../models/Member"
 class MemberStore{
   @observable members = []
@@ -49,6 +49,11 @@ class MemberStore{
     return requestChangeRandomPw(id).then(
       (result) => {return result}
     )
+  }
+  @action getMyTemperature(code){
+    return reqeustMyTemperature(code).then(result =>{
+      return result
+    })
   }
 }
 export default  MemberStore = MemberStore.getInstance()

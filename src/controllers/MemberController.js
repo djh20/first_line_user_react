@@ -1,5 +1,6 @@
 import { FormatColorResetOutlined } from '@material-ui/icons';
 import axios from 'axios'
+import MyTemperature from '../models/MyTemperature'
 import Member from '../models/Member'
 
 export default async function requestLogin(id, pw){
@@ -44,3 +45,20 @@ export async function requestChangePw(currentPw,NewPw){
 export async function requestChangeRandomPw(_id) {
   return await axios.post('/api/member/password/',{id : _id}).then(res => {return res}).catch(err => {console.log(err); return err.response});
 }
+
+
+
+export async function reqeustMyTemperature(code){
+  return await axios.get('/api/member/sementic/', {params:{ code :  code}}, {withCredentials: true}).catch(error => {return [] }).then(result =>{
+    var data = [];
+    if(result.data != null){ // 5-2
+        var tmp = result.data
+        Object.keys(tmp).map((key,index) => (
+            data.push(new MyTemperature(tmp[key]['year'],tmp[key]['month']-1,tmp[key]['date'],tmp[key]['temperature']))
+        ))
+        return data
+    }
+    return []
+});
+}
+

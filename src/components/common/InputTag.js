@@ -86,7 +86,7 @@ export default function InputTag(props){
         <div className={classes.tagsInput}>
             <ul className={classes.tags}>
                 {
-                    tags.map((tag, index) => (
+                    tags != undefined ? (tags.map((tag, index) => (
                         <li key={index} className={classes.tag}>
                             {tag}
                             <IconButton>
@@ -94,9 +94,8 @@ export default function InputTag(props){
                                     onClick={() => removeTags(index)}
                                     fontSize="small"/>
                             </IconButton>
-                        </li>
-                    )
-                )
+                        </li> 
+                    ))) : ""
                 }
             </ul>
             <div className={classes.inputDiv} >

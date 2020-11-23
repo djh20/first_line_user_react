@@ -3,7 +3,7 @@ import React, {useRef, useContext} from 'react';
 import Input from "@material-ui/core/Input";
 import { makeStyles } from '@material-ui/core/styles';
 import ReplyStore from "../../stores/ReplyStore";
-
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     input : {
@@ -25,11 +25,13 @@ export default function ReplyInput(props){
     const classes = useStyles();
     const text = useRef("")
     const replyStore = useContext(ReplyStore.context)
+    const histroy = useHistory()
     const postReply = (e) => {
         e.preventDefault();
         replyStore.postReply(props.post_id,text.current.value).then(result => {
             if(result == true){
-                window.location.reload()
+                text.current.value = ""
+                histroy.push("/post/detail/"+props.post_id, { update: true })
             }else{
                 alert("댓글 등록에 실패했습니다")
             }

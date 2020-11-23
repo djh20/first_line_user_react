@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import ReplyCard from './ReplyCard'
 import Grid from '@material-ui/core/Grid';
-
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root:{
@@ -12,9 +12,6 @@ const useStyles = makeStyles({
 
 export default function ReplyList(props){
     const classes = useStyles()
-    useEffect(()=>{
-        console.log(props.replies)
-    },[])
     return(
         <div className={classes.root}>
         <Grid Container spacing={0}>

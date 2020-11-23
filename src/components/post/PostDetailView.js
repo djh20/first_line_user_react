@@ -10,10 +10,19 @@ import React, {useState, useContext } from "react";
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Typography } from '@material-ui/core'
 import { autorun } from 'mobx'
 import { useHistory } from 'react-router-dom';
 import ReportIcon from '@material-ui/icons/Report';
+import EditIcon from '@material-ui/icons/Edit';
+import {Link} from 'react-router-dom'
+import DeleteIcon from '@material-ui/icons/Delete';
+import { green, indigo } from '@material-ui/core/colors';
+import PostReportDialog from '../report/PostReportDialog'
+import ReplyReportDialog from '../report/ReplyReportDialog'
+import SnackbarStore from '../../stores/SnackbarStore'
+
 const useStyles = makeStyles({
     root: {
         "@media (min-device-width: 481px)": {// PC
@@ -57,25 +66,22 @@ const useStyles = makeStyles({
           fontSize : '3rem',
           display : 'flex',
       },
-      postReportBtn: {
-        fontSize : '3rem',
-      },
-    //   recommandWrapper : {
-    //   },
-    //   reportWrapper : {
-    //     verticalAlign:'top',
-    //     float :'right',
-    //   },
       likeNum : {
         fontSize : '1.3rem',
         fontWeight : 'bold',
         color : 'white',
       },
-      iconWrapper:{
+      modifyDeleteIconWrapper:{
+        width: '80%',
+        display : 'flex',
+        flexDirection: 'row',
+        justifyContent:'flex-end',
+    },
+      likeReportIconWrapper:{
           width: '80%',
           display : 'flex',
           flexDirection: 'row',
-          justifyContent:'center'
+          justifyContent:'center',
       }
 
 });
@@ -87,29 +93,36 @@ const PostDetailView = observer( (props) => {
     const replyStore = useContext(ReplyStore.context)
     const post_id = props.match.params.post_id
     const [isMyPost,setIsMyPost] = useState(false)
+    const [reRender,setReRender] = useState(false)
     const history = useHistory();
     
     useEffect(() => {
         postStore.readPost(post_id).then(post=>{
             setPost(post)
         })
-    },[]);
+    },[reRender]);
 
-    const deletePost = (e) => {
+    const deleteMyPost = (e) => {
         e.preventDefault();
-        postStore.deletePost(post_id).then(result => {
+        postStore.deleteMyPost(post_id).then(result => {
             if(result == true){
-                window.location.reload()
+                SnackbarStore.pushMessage("게시글이 성공적으로 삭제되었습니다", true)
+                history.push('/')
             }else{
-                alert("게시글 삭제에 실패했습니다")
+                SnackbarStore.pushMessage("게시글이 삭제에 실패했습니다", false)
             }
         })
     }
     
-    const editPost = (e) =>
-    {
-        e.preventDefault();
-        history.push("/post/write");
+    function likePost(){
+        postStore.likePost(post_id).then(result => {
+            if(result == true){
+                setReRender(!reRender)
+                history.push('/post/detail/'+post_id)
+            }else{
+                SnackbarStore.pushMessage("게시글이 좋아요에 실패했습니다", false)
+            }
+        })
     }
 
     return(
@@ -121,24 +134,48 @@ const PostDetailView = observer( (props) => {
                         <Grid alignItems="flex-end" className={classes.cards} align="center">                            
                             <PostDetailCard className = {classes.post }post = {post} ></PostDetailCard>   
                             {
-                                isMyPost == false ? "" :(
-                                    <div id="myReplyBtnGroup">
-                                        <Button className={classes.deleteBtn} onClick={deletePost} >
-                                            삭제
-                                        </Button>
-                                        <Button className={classes.editBtn}> onClick={editPost}
-                                            수정
-                                        </Button>
+                                post.isMyPost == false ? "" :(
+                                    <div className={classes.modifyDeleteIconWrapper}>
+                                        <Link to={{
+                                            pathname: "/post/write",
+                                            state: { 
+                                                old_post_id: post.post_id,
+                                                old_title: post.title,
+                                                old_text: post.text,
+                                                old_keyword: post.keyword,
+                                                old_tag: post.tag,
+                                             }
+                                        }}
+                                        style={{ textDecoration: 'none' }}
+                                        >
+                                            <IconButton>
+                                        <EditIcon style={{ color: green[500] }} fontSize="big"/>
+                                        </IconButton>
+                                        </Link>
+                                        <IconButton onClick={deleteMyPost}>
+                                            <DeleteIcon style={{ color: indigo[500] }} fontSize="big"></DeleteIcon>
+                                        </IconButton>
                                     </div> 
                                 )
                             }
-                            <div className={classes.iconWrapper}>
+                            <div className={classes.likeReportIconWrapper}>
                                 <div className={classes.recommandWrapper}>
-                                    <IconButton><FavoriteBorderIcon className={classes.recommand} color='primary'/></IconButton>
-                                    <Typography className={classes.likeNum} >0</Typography>
+                                <IconButton onClick={likePost}>
+                                        {
+                                            post.isLike == false ? 
+                                            (
+                                            <FavoriteBorderIcon className={classes.recommand} color='primary'/>
+                                            ) 
+                                            :
+                                            (
+                                            <FavoriteIcon className={classes.recommand} color='primary'/>
+                                            )
+                                        }
+                                        </IconButton>
+                                    <Typography className={classes.likeNum} >{post.num_good}</Typography>
                                 </div>
                                 <div className={classes.reportWrapper}>
-                                <IconButton><ReportIcon className = {classes.postReportBtn} color= 'secondary'></ReportIcon></IconButton>
+                                    <PostReportDialog post_id={post_id}/>
                                 </div>
                             </div>
                             <ReplyView className={classes.replyView} post_id={post_id}></ReplyView>

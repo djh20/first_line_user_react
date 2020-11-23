@@ -10,6 +10,7 @@ import { CenterFocusStrong } from '@material-ui/icons';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import postStore from '../../stores/PostStore';
 import Container from '@material-ui/core/Container';
+import SnackbarStore from '../../stores/SnackbarStore'
 
 const useStyles = makeStyles({
     root: {
@@ -37,33 +38,50 @@ const useStyles = makeStyles({
     }
   );
 export default function PostEditor(props){
-    var old_title, old_text, old_checked, old_keyword, old_tag
 
-    props.title == undefined ? old_title='': old_title=props.title
-    props.text == undefined ? old_text='': old_text=props.text
-    props.checked == undefined ? old_checked=true : old_checked=props.checked
-    props.keyword == undefined ? old_keyword=[] : old_keyword=props.keyword
-    props.tag == undefined ? old_tag=[] : old_tag=props.tag
-
+    const old_post_id = props.location.state == undefined ? undefined : props.location.state.old_post_id
+    const old_title = props.location.state == undefined ? undefined : props.location.state.old_title
+    const old_text = props.location.state == undefined ? undefined : props.location.state.old_text
+    const old_keyword = props.location.state == undefined ? undefined : props.location.state.old_keyword
+    const old_tag = props.location.state == undefined ? undefined : props.location.state.old_tag
+    
+    const is_modify_mode = old_post_id == undefined ? false : true
     const classes = useStyles();
-    const title = useRef(old_title);
-    const [text, setText] = useState(old_text);
-    const [tags, setTags] = useState(old_tag);
-    const [checked, setChecked] = useState(old_checked);
-    const [keyword, setKeyword] = useState(old_keyword);
+    const title = useRef();
+    const [text, setText] = useState(old_text == undefined ? "<p> </p>" : old_text);
+    const [tags, setTags] = useState(old_tag == undefined ? [] : old_tag);
+    const [keyword, setKeyword] = useState(old_keyword == undefined ? "" : old_keyword);
+    const [checked, setChecked] = useState(keyword == "" ? false : true);
     const addPost = () => {
-        var usedKeyword = (checked == "true" ? keyword: "" )
-        postStore.addPost(title.current.value, text, tags, usedKeyword).then(result =>{
+        postStore.addPost(title.current.value, text, tags, keyword).then(result =>{
           if(result){
-            alert("작품이 게시되었습니다");
+            SnackbarStore.pushMessage("성공적으로 게시되었습니다", true)
             window.location.replace("/")
           }
           else{
-            alert("작품 게시에 실패하였습니다");
+            SnackbarStore.pushMessage("작품 게시에 실패하였습니다", false)
             handleClose();
           }
         })
     }
+
+    const updatePost = () => {
+      postStore.updatePost(old_post_id, title.current.value, text, tags, keyword).then(result =>{
+        if(result){
+          SnackbarStore.pushMessage("성공적으로 수정되었습니다", true)
+          window.location.replace("/")
+        }
+        else{
+          SnackbarStore.pushMessage("작품 수정에 실패했습니다", false)
+          handleClose();
+        }
+      })
+  }
+
+
+    React.useEffect(() => {
+      title.current.value = old_title == undefined ? "" : old_title
+    },[])
     return(
         <div className={classes.root}>
           <Container className={classes.wrapper}>
@@ -76,6 +94,7 @@ export default function PostEditor(props){
                       className={classes.textEditor} 
                       titleRef={title}
                       textState={setText}
+                      text={text}
                       tagsState={tags}
                       setTagsState={setTags}
                       checked={checked}
@@ -89,7 +108,7 @@ export default function PostEditor(props){
                           <TelegramIcon 
                               className={classes.button}
                               type="submit"
-                              onClick={addPost}
+                              onClick={is_modify_mode == false ? addPost : updatePost}
                               fontSize="large"/>
                       </IconButton>
                   </Grid>
