@@ -125,15 +125,6 @@ const SignInView = observer( (props) => {
               <Grid container>
                 <Grid item xs>
                   <ChangePwDialog/>
-                  <Link   
-                  to={{
-                      pathname: "#",
-                  }}
-                  style={{ textDecoration: 'none' }}
-                  >
-                    {"비밀번호를 잃어버리셨나요?"}
-                  </Link>
-
                 </Grid>
                 <Grid item>
                 <Link   

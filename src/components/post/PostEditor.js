@@ -11,6 +11,7 @@ import TelegramIcon from '@material-ui/icons/Telegram';
 import postStore from '../../stores/PostStore';
 import Container from '@material-ui/core/Container';
 import SnackbarStore from '../../stores/SnackbarStore'
+import KeywordStore from '../../stores/KeywordStore';
 
 const useStyles = makeStyles({
     root: {
@@ -44,7 +45,7 @@ export default function PostEditor(props){
     const old_text = props.location.state == undefined ? undefined : props.location.state.old_text
     const old_keyword = props.location.state == undefined ? undefined : props.location.state.old_keyword
     const old_tag = props.location.state == undefined ? undefined : props.location.state.old_tag
-    
+    const keywordStore = useContext(KeywordStore.context)
     const is_modify_mode = old_post_id == undefined ? false : true
     const classes = useStyles();
     const title = useRef();
@@ -81,7 +82,12 @@ export default function PostEditor(props){
 
     React.useEffect(() => {
       title.current.value = old_title == undefined ? "" : old_title
-    },[])
+      if(!is_modify_mode) 
+        keywordStore.getTodayKeyword().then(keyword=>{
+          console.log(keyword)
+          setKeyword(keyword)
+      })
+    })
     return(
         <div className={classes.root}>
           <Container className={classes.wrapper}>

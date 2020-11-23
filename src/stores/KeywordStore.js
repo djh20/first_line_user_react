@@ -1,8 +1,11 @@
 import { observable, action } from 'mobx';
 import {createContext} from "react";
 import axios from 'axios'
+import requestGetTodayKeyword from '../controllers/KeywordController';
+
 class KeywordStore{
-  static instance = null;
+  @observable keyword = [] 
+  static instance = null; 
 
   static getInstance () {
     if (!KeywordStore.instance) 
@@ -13,11 +16,12 @@ class KeywordStore{
     this.context = createContext(this)
   }
   @action 
-  async readTodayKeyword(){
-    const result = await axios.get(
-        `/api/keyword_/`
-    ).catch(error => {return null });
-    return result === null ? null : result.data
+  async getTodayKeyword(){
+    return requestGetTodayKeyword().then(result => {
+      return result
+    }
+    )
   }
+
 }
 export default  KeywordStore = KeywordStore.getInstance()
