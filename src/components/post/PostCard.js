@@ -105,7 +105,7 @@ export default function PostCard(props){
     if(temp < 40)
       tempColor = "#3f51b5"
     else if(40 <= temp && temp <= 60)
-      tempColor = "#f44336"
+      tempColor = "#4caf50"
     else
       tempColor = "#ba000d"
 
