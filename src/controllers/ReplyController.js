@@ -8,9 +8,6 @@ export default async function requestReadReplies(_post_id){
         var data = [];
         if(result.data != null){ 
             var tmp = result.data
-            console.log(tmp)
-            console.log(tmp['datas'])
-            console.log(tmp['datas'][1])
             Object.keys(tmp['datas']).map((key,index) => (
                 data.push(new Reply(tmp['datas'][key]['reply_id'],tmp['datas'][key]['post_id'],tmp['datas'][key]['text'],tmp['datas'][key]['writer']
                 ,tmp['datas'][key]['writing_date'],tmp['datas'][key]['editing_date'],tmp['isMine'][key]))

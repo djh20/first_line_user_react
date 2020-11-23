@@ -29,6 +29,7 @@ export async function readPost(post_id){ // 5-1
     ).catch(error => {return [] }).then(result =>{
         if(result.data != null){ // 5-2
             var tmp = result.data
+            console.log(tmp)
             var post = new Post(tmp['post']['post_id'], tmp['post']['title'],
                 tmp['post']['text'],tmp['post']['num_good'],tmp['post']['num_reply'],
                 tmp['post']['tag'],tmp['post']['writer'],
@@ -50,6 +51,7 @@ export async function search(code, query, pageNo){ // 5-1
         var data = [];
         if(result.data != null){ // 5-2
             var tmp = result.data
+    
             Object.keys(tmp).map((key,index) => (
                 data.push(new Post(tmp[key]['post_id'], tmp[key]['title'],
                 tmp[key]['text'],tmp[key]['num_good'],tmp[key]['num_reply'],
@@ -99,7 +101,7 @@ export async function requestReadMyPost(){ // 5-1
                 tmp[key]['text'],tmp[key]['num_good'],tmp[key]['num_reply'],
                 tmp[key]['tag'],tmp[key]['writer'],
                 tmp[key]['writing_date'],tmp[key]['edting_date'],
-                tmp[key]['temperature'],tmp[key]['keyword']
+                tmp[key]['temperature'],tmp[key]['keyword'],tmp[key]['isLike']
                 ))
             ))
             console.log(data)
