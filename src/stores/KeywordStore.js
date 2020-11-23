@@ -19,8 +19,7 @@ class KeywordStore{
   async getTodayKeyword(){
     return requestGetTodayKeyword().then(result => {
       return result
-    }
-    )
+    })
   }
 
 }

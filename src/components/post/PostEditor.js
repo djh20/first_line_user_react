@@ -87,7 +87,7 @@ export default function PostEditor(props){
           console.log(keyword)
           setKeyword(keyword)
       })
-    })
+    },[])
     return(
         <div className={classes.root}>
           <Container className={classes.wrapper}>
