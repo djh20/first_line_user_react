@@ -3,6 +3,8 @@ import React, {useState, useContext,useEffect  } from "react";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, Typography} from '@material-ui/core'
 import MemberStore from '../../stores/MemberStore'
+import PostStore from '../../stores/PostStore'
+import ReplyStore from '../../stores/ReplyStore'
 import FaceTwoToneIcon from '@material-ui/icons/FaceTwoTone';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -78,6 +80,8 @@ function a11yProps(index) {
 const MemberDetailView = observer((props) => {
     const classes = useStyles();
     const memberStore = useContext(MemberStore.context)
+    const postStore = useContext(PostStore.context)
+    const replyStore = useContext(ReplyStore.context)
     const [id,setId] = useState("");
     const [name,setName] = useState("");
     const [nickname,setNickname] = useState("");
@@ -99,7 +103,9 @@ const MemberDetailView = observer((props) => {
             setGender(member.gender)
             setPhonenumber(member.phonenumber)
             setEmail(member.email)
-    })
+        })
+        postStore.reset()
+        replyStore.reset()
     },[]);
 
 

@@ -15,10 +15,13 @@ const useStyles = makeStyles({
 const MemberPostTab = observer( (props) => {
         const classes = useStyles();
         const postStore = useContext(PostStore.context)
-      
+        const [post ,setPost] = useState([])
         useEffect(() => {
-            postStore.readMyPost();
-        },[]); 
+            postStore.readMyPost().then(post=>{
+                setPost(post)
+            })
+        },[]);
+    
 
         return(
             <div className={classes.root}>

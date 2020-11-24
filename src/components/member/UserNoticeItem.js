@@ -60,7 +60,7 @@ const UserNoticeItem = observer( (props) => {
         <div className={classes.root}>
             <div className={classes.wrapper}>
             <Link to={source_url} style={{ textDecoration: 'none' }}>
-                <ListItem button>
+                <ListItem button onClick={deleteNotice}>
                     <div className={classes.textField}>
                         <ListItemText classes={{primary:classes.text}} primary={text}/>
                         <ListItemText classes={{primary:classes.send_datetime}} primary={send_datetime} bold/>
