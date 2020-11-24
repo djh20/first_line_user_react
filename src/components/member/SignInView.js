@@ -16,16 +16,17 @@ import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import ChangePwDialog from './ChangePwDialog'
 import SnackbarStore from '../../stores/SnackbarStore'
+import LoginImage from "./src/login.png";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '92vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: 'url(' + LoginImage + ')',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
+    backgroundSize: '101% 100%',
     backgroundPosition: 'center',
   },
   paper: {

@@ -23,6 +23,9 @@ const useStyles = makeStyles( (theme) => ({
         width:"100%",
         height:"100vh",
       },
+    textField:{
+        marginTop:'2%'
+    }
 }))
 export default function MemberPwDialog(props) {
     const classes = useStyles()
@@ -81,6 +84,7 @@ export default function MemberPwDialog(props) {
             <Dialog open={open} aria-labelledby="form-dialog-title">
             <DialogTitle id="form-dialog-title">회원 정보 수정</DialogTitle>
             <DialogContent>
+            <div className={classes.textField}>
             <FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
             <InputLabel htmlFor="filled-adornment-password">기존 비밀번호</InputLabel>
             <FilledInput
@@ -103,6 +107,8 @@ export default function MemberPwDialog(props) {
                 }
             />
             </FormControl>
+            </div>
+            <div className={classes.textField}>
             <FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
             <InputLabel htmlFor="filled-adornment-password">새 비밀번호</InputLabel>
             <FilledInput
@@ -124,6 +130,8 @@ export default function MemberPwDialog(props) {
                 }
             />
             </FormControl>
+            </div>
+            <div className={classes.textField}>
             <FormControl className={clsx(classes.margin, classes.textField)} variant="filled">
             <InputLabel htmlFor="filled-adornment-password">새 비밀번호 확인</InputLabel>
             <FilledInput
@@ -145,6 +153,7 @@ export default function MemberPwDialog(props) {
                 }
             />
             </FormControl>
+            </div>
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose} color="primary">
