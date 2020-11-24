@@ -27,7 +27,7 @@ export async function readPost(post_id){ // 5-1
     return await axios.get(
         `/api/post/${post_id}/`, {withCredentials: true}
     ).catch(error => {return [] }).then(result =>{
-        if(result.data != null){ // 5-2
+        if(result.data != null){ // 5-2 
             var tmp = result.data
             var post = new Post(tmp['post']['post_id'], tmp['post']['title'],
                 tmp['post']['text'],tmp['post']['num_good'],tmp['post']['num_reply'],

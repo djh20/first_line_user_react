@@ -44,7 +44,6 @@ class NoticeStore {
     deleteNotice(notice_id)
     {
         var index = this.find(notice_id)
-        console.log(index)
         if(index != null)
             this.myNotices.splice(index, 1);
         return requestDeleteNotice(notice_id).then( (result) =>{
@@ -55,7 +54,6 @@ class NoticeStore {
     find(notice_id){
         for(var i = 0 ; i < this.myNotices.length ; i++){
             if(this.myNotices[i]['notice_id'] == notice_id){
-                console.log(i)
                 return i;
             }
         }
