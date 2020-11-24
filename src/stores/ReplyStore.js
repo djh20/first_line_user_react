@@ -14,8 +14,8 @@ class ReplyStore {
         if (!ReplyStore.instance) 
             this.instance = new ReplyStore();
         return ReplyStore.instance;
-
     }
+
     constructor() {
         this.context = createContext(this);
     }
@@ -53,6 +53,11 @@ class ReplyStore {
         return requestReadMyReplies().then(result =>{ // 4-4
             this.replies = [...result]
         })
+    }
+
+    @action
+    reset() {
+        this.replies = []
     }
 }
 

@@ -164,9 +164,9 @@ export default function PageContainer(props){
           control={<Switch color={'#ffeb3b'} className={classes.iconButton} checked={checked} onChange={handleChange} />}
         />
         <KeywordSelect 
-        checked={checked}
-        keyword={keyword}
-        setKeyword={setKeyword}
+          checked={checked}
+          keyword={keyword}
+          setKeyword={setKeyword}
         />
       </div>
       {/* title */}

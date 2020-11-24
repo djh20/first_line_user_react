@@ -13,6 +13,10 @@ class PostStore{
   constructor(){
     this.context = createContext(this) // 4-2 
   }
+  @action
+  reset(){
+    this.posts = [];
+  }
   @action 
   readAll(){
     requestReadAllPost().then(result =>{ // 4-4
@@ -22,7 +26,10 @@ class PostStore{
   }
   @action
   readPost(post_id) {
-    return readPost(post_id)
+    return readPost(post_id).then(result =>
+      {
+        return result
+      })
   }
   @action
   search(code, query,pageNo) {
@@ -35,6 +42,7 @@ class PostStore{
 
   @action
   addPost(post_title, post_text, post_tags, post_keyword){
+    console.log(post_keyword)
     return requestAddPost(post_title, post_text, post_tags, post_keyword).then(result=>{
       return result
     })

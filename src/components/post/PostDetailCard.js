@@ -57,7 +57,6 @@ const useStyles = makeStyles({
 export default function PostDetailCard(props){
     const classes = useStyles();
     const text = parse(props.post.text)
-    
     return(
         <div className={classes.root}>
                 <Card className={classes.card}>

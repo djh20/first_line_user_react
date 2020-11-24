@@ -100,6 +100,7 @@ const PostDetailView = observer( (props) => {
         postStore.readPost(post_id).then(post=>{
             setPost(post)
         })
+        replyStore.reset();
     },[reRender]);
 
     const deleteMyPost = (e) => {

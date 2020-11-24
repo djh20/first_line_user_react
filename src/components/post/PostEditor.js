@@ -55,6 +55,8 @@ export default function PostEditor(props){
     const [keyword, setKeyword] = useState(old_keyword == undefined ? "" : old_keyword);
     const [checked, setChecked] = useState(keyword == "" ? false : true);
     const addPost = () => {
+      if(checked)
+      {
         postStore.addPost(title.current.value, text, tags, keyword).then(result =>{
           if(result){
             SnackbarStore.pushMessage("성공적으로 게시되었습니다", true)
@@ -64,10 +66,24 @@ export default function PostEditor(props){
             SnackbarStore.pushMessage("작품 게시에 실패하였습니다", false)
           }
         })
+      }
+      else
+      {
+        postStore.addPost(title.current.value, text, tags, "").then(result =>{
+          if(result){
+            SnackbarStore.pushMessage("성공적으로 게시되었습니다", true)
+            window.location.replace("/")
+          }
+          else{
+            SnackbarStore.pushMessage("작품 게시에 실패하였습니다", false)
+          }
+        })
+      }
+      
     }
 
     const updatePost = () => {
-      postStore.updatePost(old_post_id, title.current.value, text, tags, keyword).then(result =>{
+      postStore.updatePost(old_post_id, title.current.value, text, tags, old_keyword).then(result =>{
         if(result){
           SnackbarStore.pushMessage("성공적으로 수정되었습니다", true)
           window.location.replace("/")
@@ -83,7 +99,6 @@ export default function PostEditor(props){
       title.current.value = old_title == undefined ? "" : old_title
       if(!is_modify_mode) 
         keywordStore.getTodayKeyword().then(keyword=>{
-          console.log(keyword)
           setKeyword(keyword)
       })
     },[])
